@@ -8,7 +8,7 @@
 
 **Estado**: pendiente de validación por María y Ana, y de revisión técnica del IAM (Jesús Cuadrado).
 
-**Motivo**: desarrollo del Tema 28, dentro de la serie de temas técnicos generados desde cero, replicando la estructura y el formato de los Temas 1, 11 y 17-24 ya consolidados. Se genera **fuera de secuencia** (T25, T26 y T27 siguen pendientes) a petición de Joan, igual que se hizo con el T23 antes que el T22.
+**Motivo**: desarrollo del Tema 28, dentro de la serie de temas técnicos generados desde cero, replicando la estructura y el formato de los Temas 1, 11 y 17-24 ya consolidados. Con él, el bloque técnico queda **completo de T11 a T29** salvo la publicación del T27, que está generado y confirmado en local a la espera de subirse: a fecha de hoy están publicados T11-T26 y T29.
 
 ### Alcance de la v1.0
 
