@@ -44,7 +44,7 @@
    4.2. Virtualización de redes y redes definidas por software (SDN)
    4.3. Gestión centralizada, monitorización y orquestación de recursos
 
-5. **Marco normativo, seguridad y aplicación en la Administración Pública**
+5. **Marco normativo, seguridad y aplicación en la Administración Pública (material complementario)**
    5.1. Cumplimiento del Esquema Nacional de Seguridad (ENS) en entornos virtualizados
    5.2. Protección de datos personales y garantías de privacidad (RGPD y LOPDGDD)
    5.3. Continuidad del negocio, copias de seguridad y recuperación ante desastres

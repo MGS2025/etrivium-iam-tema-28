@@ -745,6 +745,8 @@ Un entorno virtualizado sin gestión centralizada es ingobernable: la facilidad 
 
 ## 5. Marco normativo, seguridad y aplicación en la Administración Pública
 
+> **Material complementario.** El enunciado oficial de este tema no nombra este apartado. Se mantiene porque sitúa la materia en el Ayuntamiento y en la normativa que le aplica, pero lo exigible es lo que enumera el título del tema.
+
 ### 5.1. Cumplimiento del Esquema Nacional de Seguridad (ENS) en entornos virtualizados
 
 El **Esquema Nacional de Seguridad**, regulado por el **Real Decreto 311/2022, de 3 de mayo**, es de aplicación obligatoria a todo el sector público y a los sistemas de información que traten información o presten servicios administrativos electrónicos, incluidos los de los ayuntamientos, así como a los sistemas de los **proveedores** que les prestan servicios en esos ámbitos [ENS]. Un centro de proceso de datos virtualizado municipal está, por tanto, plenamente sujeto a él.
