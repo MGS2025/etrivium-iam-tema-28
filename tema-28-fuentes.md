@@ -82,4 +82,4 @@
 
 ## Nota sobre la volatilidad del tema
 
-Los **conceptos** de este tema (los principios de Popek y Goldberg, las tres técnicas de virtualización, la clasificación de hipervisores, el modelo VDI, la separación de planos de SDN, los objetivos RTO/RPO) son **estables** y son lo que se pregunta en examen. Los **productos** que los implementan cambian de nombre, de propietario y de licencia con frecuencia. Por eso el contenido apoya cada afirmación técnica en fuente Tier 1 y usa los productos de Tier 2 únicamente como ilustración, indicando siempre a qué concepto general corresponden.
+Los **conceptos** de este tema (los principios de Popek y Goldberg, las tres técnicas de virtualización, la clasificación de hipervisores, el modelo VDI, la separación de planos de SDN, los objetivos RTO/RPO) son **estables**. Los **productos** que los implementan cambian de nombre, de propietario y de licencia con frecuencia. Por eso el contenido apoya cada afirmación técnica en fuente Tier 1 y usa los productos de Tier 2 únicamente como ilustración, indicando siempre a qué concepto general corresponden.

@@ -382,7 +382,7 @@
 ## D9 · Migración, HA y FT: tres respuestas distintas
 
 **Sección**: §2.4 — Alta disponibilidad y tolerancia a fallos
-**Propósito**: Separar de forma inequívoca los tres mecanismos que el examen suele confundir, según sean planificados o no y según haya corte o no.
+**Propósito**: Separar de forma inequívoca los tres mecanismos que se suelen confundir, según sean planificados o no y según haya corte o no.
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 326" role="img" aria-label="Comparación de migración en caliente, alta disponibilidad y tolerancia a fallos según sean eventos planificados o no planificados y según provoquen o no corte de servicio, con su coste relativo y su caso de uso">
@@ -406,7 +406,7 @@
   <rect x="20" y="246" width="640" height="26" rx="4" fill="#0055a0"/>
   <text x="340" y="264" text-anchor="middle" class="t9">Con migración en caliente + modo mantenimiento, parchear el hardware DEJA DE REQUERIR VENTANA DE PARADA</text>
   <rect x="20" y="278" width="640" height="24" rx="4" fill="none" stroke="#d13c3c" stroke-width="2"/>
-  <text x="340" y="294" text-anchor="middle" style="font:700 10px system-ui;fill:#a02020">Error más frecuente en examen: confundir HA (reinicia, hay corte) con FT (espejo, no hay corte)</text>
+  <text x="340" y="294" text-anchor="middle" style="font:700 10px system-ui;fill:#a02020">Error más frecuente: confundir HA (reinicia, hay corte) con FT (espejo, no hay corte)</text>
   <text x="670" y="316" text-anchor="end" style="font:10px system-ui;fill:#666">[Fuente: VMWARE-DOC; HYPERV-DOC]</text>
 </svg>
 ```

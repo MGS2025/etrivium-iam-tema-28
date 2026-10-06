@@ -16,13 +16,13 @@
 
 Este tema incluye cuatro tipos de **cajas callout** para facilitar el estudio:
 
-> **[DATO CLAVE EXAMEN]** Información de alta densidad memorística, con alta probabilidad de aparecer en el test oficial.
+> **[DATO CLAVE]** Información de alta densidad memorística.
 
 > **[EJERCICIO RESUELTO]** Problema + solución paso a paso (identificación de una tecnología, dimensionamiento, elección arquitectónica razonada).
 
-> **[EJEMPLO AYTO MADRID]** Aplicación de la teoría al entorno municipal (centro de proceso de datos, sede electrónica, puestos de las oficinas de atención a la ciudadanía).
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Aplicación de la teoría al entorno municipal (centro de proceso de datos, sede electrónica, puestos de las oficinas de atención a la ciudadanía).
 
-> **[REFERENCIA CRUZADA]** Enlace conceptual a otros temas del temario oficial.
+> **[RELACIÓN CON OTROS TEMAS]** Enlace conceptual a otros temas del temario oficial.
 
 Los **nombres de producto** (ESXi, Hyper-V, KVM, Xen, Citrix, Horizon, Proxmox, Docker, Kubernetes) se usan siempre como **ilustración de un concepto general**, nunca como contenido en sí mismo: la parte estable y examinable del tema son los principios, las técnicas y las arquitecturas, no las marcas. Las fuentes se citan con etiquetas breves tipo `[POPEK74]` o `[ENS]`; el registro completo está en `tema-28-fuentes.md`.
 
@@ -38,7 +38,7 @@ Se denomina **virtualización** a la técnica que permite crear una **representa
 
 El resultado más característico de aplicar esa técnica a un ordenador completo es la **máquina virtual**: un contenedor de software que se comporta como un ordenador físico independiente, con su propia CPU virtual, su memoria, su almacenamiento y sus interfaces de red, y sobre el que se instala un **sistema operativo huésped** sin modificar. El programa que crea y gobierna esas máquinas virtuales se llama **monitor de máquina virtual** (*Virtual Machine Monitor*, VMM) o, en la terminología actual, **hipervisor** [GOLDBERG73].
 
-Conviene fijar desde el principio el vocabulario, porque el examen lo utiliza con precisión:
+Conviene fijar desde el principio el vocabulario, porque se utiliza con precisión:
 
 | Término | Significado |
 |---|---|
@@ -49,7 +49,7 @@ Conviene fijar desde el principio el vocabulario, porque el examen lo utiliza co
 | **Instantánea** (*snapshot*) | Estado congelado de una máquina virtual (disco y, opcionalmente, memoria) al que se puede volver. **No es una copia de seguridad**. |
 | **Plantilla** (*template*) | Máquina virtual preparada y bloqueada que sirve de molde para desplegar máquinas nuevas idénticas. |
 
-> **[DATO CLAVE EXAMEN]** Que una máquina virtual sea, en el sistema de ficheros del anfitrión, **un conjunto de ficheros** tiene tres consecuencias que se preguntan mucho: se puede **copiar**, se puede **mover a otro anfitrión** y se puede **restaurar completa** con una sola operación. Esa es la razón última de que la virtualización simplifique tanto la continuidad del servicio y la recuperación ante desastres (§5.3).
+> **[DATO CLAVE]** Que una máquina virtual sea, en el sistema de ficheros del anfitrión, **un conjunto de ficheros** tiene tres consecuencias clave: se puede **copiar**, se puede **mover a otro anfitrión** y se puede **restaurar completa** con una sola operación. Esa es la razón última de que la virtualización simplifique tanto la continuidad del servicio y la recuperación ante desastres (§5.3).
 
 **Evolución histórica.** La virtualización no es una tecnología reciente; es una idea de los años sesenta que el hardware de gran consumo tardó cuarenta años en poder ejecutar bien:
 
@@ -63,7 +63,7 @@ Conviene fijar desde el principio el vocabulario, porque el examen lo utiliza co
 | **Virtualización de todo el centro de datos** | 2010-2015 | Se virtualizan también el **almacenamiento** y la **red** (SDN, NFV) y aparece el escritorio virtual (VDI) como producto maduro. |
 | **Contenedores y nube** | 2013-actualidad | Docker (2013) populariza los **contenedores**; Kubernetes (2014) los orquesta. La virtualización deja de ser un fin y pasa a ser **el sustrato invisible de la nube** [K8S-DOC]. |
 
-> **[DATO CLAVE EXAMEN]** Dos fechas y dos nombres que se preguntan: la virtualización **nace en los mainframes de IBM en los años sesenta** (CP-67, VM/370), no con VMware; y en x86 el problema no era de potencia sino **arquitectónico**, porque el juego de instrucciones no cumplía el teorema de Popek y Goldberg [POPEK74] [ROBIN00].
+> **[DATO CLAVE]** Dos fechas y dos nombres clave: la virtualización **nace en los mainframes de IBM en los años sesenta** (CP-67, VM/370), no con VMware; y en x86 el problema no era de potencia sino **arquitectónico**, porque el juego de instrucciones no cumplía el teorema de Popek y Goldberg [POPEK74] [ROBIN00].
 
 **Los tres principios de Popek y Goldberg.** Un monitor de máquina virtual solo merece ese nombre si cumple tres propiedades [POPEK74]:
 
@@ -71,7 +71,7 @@ Conviene fijar desde el principio el vocabulario, porque el examen lo utiliza co
 2. **Control de recursos o seguridad.** El monitor debe tener el **control completo** de los recursos físicos: ningún programa huésped puede acceder a recursos que el monitor no le haya asignado, ni afectar a otra máquina virtual.
 3. **Eficiencia o rendimiento.** Una **proporción estadísticamente dominante** de las instrucciones del huésped debe ejecutarse **directamente en la CPU real**, sin intervención del monitor. Es la propiedad que separa un hipervisor de un **emulador**.
 
-> **[DATO CLAVE EXAMEN]** **Virtualizar no es emular.** Un **emulador** (por ejemplo, ejecutar software de arquitectura Arm sobre un x86) **traduce cada instrucción** y por tanto incumple la propiedad de eficiencia; puede, en cambio, ejecutar código de una arquitectura distinta. Un **hipervisor** ejecuta la mayoría de las instrucciones directamente en la CPU real, pero **exige que huésped y anfitrión compartan arquitectura** [POPEK74].
+> **[DATO CLAVE]** **Virtualizar no es emular.** Un **emulador** (por ejemplo, ejecutar software de arquitectura Arm sobre un x86) **traduce cada instrucción** y por tanto incumple la propiedad de eficiencia; puede, en cambio, ejecutar código de una arquitectura distinta. Un **hipervisor** ejecuta la mayoría de las instrucciones directamente en la CPU real, pero **exige que huésped y anfitrión compartan arquitectura** [POPEK74].
 
 El **teorema de virtualizabilidad** que acompaña a los principios establece la condición formal: una arquitectura es virtualizable de forma clásica (por *trap-and-emulate*, es decir, «atrapar y emular») si **el conjunto de sus instrucciones sensibles está contenido en el de sus instrucciones privilegiadas**. Las **instrucciones sensibles** son las que consultan o modifican el estado de configuración de la máquina; las **privilegiadas**, las que provocan una excepción si se ejecutan fuera del modo supervisor. Si toda instrucción sensible es privilegiada, el monitor puede ejecutar el huésped en modo no privilegiado y limitarse a atrapar y emular las excepciones que se produzcan [POPEK74].
 
@@ -85,7 +85,7 @@ El **teorema de virtualizabilidad** que acompaña a los principios establece la 
 - **Continuidad del servicio.** Migración en caliente, reinicio automático en otro anfitrión y recuperación en un emplazamiento alternativo (§2.4 y §5.3).
 - **Entornos de prueba realistas.** Se pueden reproducir entornos completos de preproducción con instantáneas y descartarlos después.
 
-**Inconvenientes y riesgos**, que el examen suele plantear como la otra cara de las ventajas:
+**Inconvenientes y riesgos**, que son la otra cara de las ventajas:
 
 - **Sobrecarga** (*overhead*): siempre existe un coste de rendimiento, hoy muy reducido pero no nulo, y muy visible en cargas de E/S intensiva.
 - **Concentración del riesgo**: si un anfitrión soporta veinte máquinas virtuales, su caída afecta a veinte servicios. Esto exige **agrupación en clúster** y reglas de antiafinidad (§2.4).
@@ -93,9 +93,9 @@ El **teorema de virtualizabilidad** que acompaña a los principios establece la 
 - **Proliferación descontrolada** (*VM sprawl*): al ser tan fácil crear máquinas virtuales, se multiplican las que nadie da de baja, consumiendo licencias, almacenamiento, copias de seguridad y superficie de parcheo (§4.3).
 - **Dependencia y licenciamiento**: los modelos de licencia de hipervisores y de sistemas huéspedes son complejos y han sufrido cambios abruptos; es un riesgo contractual real para una Administración.
 
-> **[EJEMPLO AYTO MADRID]** Antes de virtualizar, cada aplicación municipal (padrón, registro, gestor de expedientes, portal interno) tenía su propio servidor físico, dimensionado para su pico anual y ocioso el resto del tiempo. Al consolidar esos servidores como máquinas virtuales sobre un grupo reducido de anfitriones, el Ayuntamiento reduce equipos, consumo eléctrico y espacio de sala, y gana la posibilidad de mover una aplicación de un anfitrión a otro sin interrumpir el servicio a la ciudadanía.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Antes de virtualizar, cada aplicación municipal (padrón, registro, gestor de expedientes, portal interno) tenía su propio servidor físico, dimensionado para su pico anual y ocioso el resto del tiempo. Al consolidar esos servidores como máquinas virtuales sobre un grupo reducido de anfitriones, el Ayuntamiento reduce equipos, consumo eléctrico y espacio de sala, y gana la posibilidad de mover una aplicación de un anfitrión a otro sin interrumpir el servicio a la ciudadanía.
 
-> **[REFERENCIA CRUZADA]** La **arquitectura de ordenadores** y sus componentes internos (CPU, memoria, buses) se estudian en el **Tema 11**; los **sistemas operativos** y sus mecanismos de gestión de procesos y memoria, en el **Tema 14**; la **administración del sistema operativo** en el **Tema 27**. Este tema da por conocidos esos conceptos y se centra en **qué cambia cuando se interpone un hipervisor**.
+> **[RELACIÓN CON OTROS TEMAS]** La **arquitectura de ordenadores** y sus componentes internos (CPU, memoria, buses) se estudian en el **Tema 11**; los **sistemas operativos** y sus mecanismos de gestión de procesos y memoria, en el **Tema 14**; la **administración del sistema operativo** en el **Tema 27**. Este tema da por conocidos esos conceptos y se centra en **qué cambia cuando se interpone un hipervisor**.
 
 ### 1.2. Arquitectura clásica de la virtualización y nivel de abstracción
 
@@ -112,7 +112,7 @@ La virtualización puede introducirse en **distintos niveles de la pila** de un 
 | **Almacenamiento** | Los volúmenes y sistemas de ficheros | SDS, hiperconvergencia — §4.1 |
 | **Red** | Conmutadores, encaminadores, cortafuegos y segmentos | Conmutador virtual, VXLAN, SDN, NFV — §4.2 |
 
-> **[DATO CLAVE EXAMEN]** No confundir el nivel: el **hipervisor** virtualiza el **hardware** y por eso cada máquina virtual lleva **su propio núcleo**; el **contenedor** virtualiza el **sistema operativo** y por eso todos comparten el **núcleo del anfitrión**; la **máquina virtual de Java** virtualiza el **entorno de ejecución** y no es en absoluto lo mismo que una máquina virtual de sistema, aunque compartan nombre.
+> **[DATO CLAVE]** No confundir el nivel: el **hipervisor** virtualiza el **hardware** y por eso cada máquina virtual lleva **su propio núcleo**; el **contenedor** virtualiza el **sistema operativo** y por eso todos comparten el **núcleo del anfitrión**; la **máquina virtual de Java** virtualiza el **entorno de ejecución** y no es en absoluto lo mismo que una máquina virtual de sistema, aunque compartan nombre.
 
 La arquitectura clásica de la virtualización de plataforma se apoya en los **niveles de privilegio** de la CPU. En x86, la arquitectura define cuatro **anillos** (*rings*) numerados del 0 al 3: el sistema operativo se ejecuta en el **anillo 0** (modo supervisor, acceso pleno al hardware) y las aplicaciones en el **anillo 3** (modo usuario). El problema es evidente: si el hipervisor debe controlar el hardware, tiene que ocupar el anillo 0, y entonces **el sistema huésped no puede estar donde espera estar** [INTEL-SDM] [ROBIN00].
 
@@ -162,11 +162,11 @@ Inconvenientes:
 - **Exige modificar el núcleo del huésped**: solo es viable con sistemas operativos de código abierto o cuyo fabricante haya publicado los componentes de integración. Un sistema cerrado y antiguo no puede paravirtualizarse.
 - **Rompe la equivalencia**: el huésped ya no es idéntico al que correría sobre hardware físico, lo que complica el soporte del fabricante.
 
-> **[DATO CLAVE EXAMEN]** La **paravirtualización pura del núcleo** ha quedado prácticamente desplazada por la virtualización asistida por hardware, que da rendimiento equivalente **sin tocar el huésped**. Lo que **sí sigue plenamente vigente** —y es un error frecuente creer lo contrario— es la **paravirtualización de dispositivos**: los controladores **virtio** [VIRTIO], los *Integration Services* de Hyper-V o VMware Tools son paravirtualización aplicada solo a la E/S, y se usan en la práctica totalidad de las máquinas virtuales actuales (§2.2.2).
+> **[DATO CLAVE]** La **paravirtualización pura del núcleo** ha quedado prácticamente desplazada por la virtualización asistida por hardware, que da rendimiento equivalente **sin tocar el huésped**. Lo que **sí sigue plenamente vigente** —y es un error frecuente creer lo contrario— es la **paravirtualización de dispositivos**: los controladores **virtio** [VIRTIO], los *Integration Services* de Hyper-V o VMware Tools son paravirtualización aplicada solo a la E/S, y se usan en la práctica totalidad de las máquinas virtuales actuales (§2.2.2).
 
 #### 1.2.3. Virtualización asistida por hardware
 
-La **virtualización asistida por hardware** resuelve el problema en el origen: en lugar de sortear las carencias del juego de instrucciones por software, los fabricantes **amplían la arquitectura de la CPU** con un modo de ejecución adicional pensado para el hipervisor. Es el modelo dominante desde finales de la década de 2000 y el que se pregunta con más detalle [INTEL-SDM] [AMD-APM].
+La **virtualización asistida por hardware** resuelve el problema en el origen: en lugar de sortear las carencias del juego de instrucciones por software, los fabricantes **amplían la arquitectura de la CPU** con un modo de ejecución adicional pensado para el hipervisor. Es el modelo dominante desde finales de la década de 2000 [INTEL-SDM] [AMD-APM].
 
 **En Intel (VT-x)**, la extensión **VMX** introduce [INTEL-SDM]:
 
@@ -181,9 +181,9 @@ La asistencia por hardware no se limitó a la CPU; se extendió a los otros dos 
 - **Memoria — EPT / NPT.** Sin ayuda del hardware, el hipervisor tenía que mantener por software **tablas de páginas sombra** (*shadow page tables*) que combinaran la traducción del huésped con la suya propia, un mecanismo correcto pero muy costoso. Las **tablas de páginas extendidas** (**EPT** en Intel) o **anidadas** (**NPT**, también llamada RVI, en AMD) añaden un **segundo nivel de traducción en la propia MMU**: el huésped traduce de dirección virtual a «física» del huésped, y el hardware traduce esa a dirección física real del anfitrión, sin intervención del hipervisor [INTEL-SDM] [AMD-APM]. En Arm, el mecanismo equivalente es la **traducción en dos etapas** (*Stage-1* y *Stage-2*) [ARM-ARM].
 - **Entrada/salida — IOMMU.** La **unidad de gestión de memoria de E/S** (**VT-d** en Intel, **AMD-Vi** en AMD) traduce y controla los accesos **DMA** que los dispositivos hacen a la memoria. Sin ella, asignar un dispositivo físico directamente a una máquina virtual sería un agujero de seguridad, porque ese dispositivo podría leer y escribir toda la memoria del anfitrión. Con ella, el hipervisor confina cada dispositivo a las páginas de su máquina virtual [INTEL-VTD].
 
-> **[DATO CLAVE EXAMEN]** Las tres asistencias por hardware y el problema que resuelve cada una: **VT-x / AMD-V / EL2** → el problema de las **instrucciones sensibles** y los anillos de privilegio; **EPT / NPT / Stage-2** → el problema de la **doble traducción de memoria** (sustituyen a las tablas sombra); **VT-d / AMD-Vi (IOMMU)** → el problema del **acceso directo a memoria por parte de los dispositivos**, y son el requisito para el *passthrough* y para SR-IOV [INTEL-SDM] [AMD-APM] [INTEL-VTD].
+> **[DATO CLAVE]** Las tres asistencias por hardware y el problema que resuelve cada una: **VT-x / AMD-V / EL2** → el problema de las **instrucciones sensibles** y los anillos de privilegio; **EPT / NPT / Stage-2** → el problema de la **doble traducción de memoria** (sustituyen a las tablas sombra); **VT-d / AMD-Vi (IOMMU)** → el problema del **acceso directo a memoria por parte de los dispositivos**, y son el requisito para el *passthrough* y para SR-IOV [INTEL-SDM] [AMD-APM] [INTEL-VTD].
 
-Comparativa final de las tres técnicas, que es la tabla que conviene llevar memorizada al examen:
+Comparativa final de las tres técnicas, que es la tabla que conviene llevar memorizada:
 
 | | **Virtualización total** | **Paravirtualización** | **Asistida por hardware** |
 |---|---|---|---|
@@ -195,11 +195,11 @@ Comparativa final de las tres técnicas, que es la tabla que conviene llevar mem
 | Sistemas huéspedes admitidos | **Cualquiera** | Solo los adaptados | **Cualquiera** |
 | Estado actual | Vigente como concepto; combinada con virtio | Desplazada en el núcleo, **vigente en E/S** | **Modelo dominante** |
 
-> **[EJERCICIO RESUELTO]** *Se instala un hipervisor en un servidor y, al crear la primera máquina virtual de 64 bits, la consola informa de que «la virtualización por hardware no está disponible». El procesador es moderno. ¿Cuál es la causa más probable y cómo se corrige?* **Solución**: la extensión de virtualización de la CPU (**Intel VT-x** o **AMD-V**) está **desactivada en la BIOS/UEFI** del servidor, que es como suele venir de fábrica en algunos equipos. Se corrige activándola en la configuración del firmware y reiniciando. Es un fallo de configuración, no de hardware ni de licencia, y es una pregunta clásica de examen [INTEL-SDM].
+> **[EJERCICIO RESUELTO]** *Se instala un hipervisor en un servidor y, al crear la primera máquina virtual de 64 bits, la consola informa de que «la virtualización por hardware no está disponible». El procesador es moderno. ¿Cuál es la causa más probable y cómo se corrige?* **Solución**: la extensión de virtualización de la CPU (**Intel VT-x** o **AMD-V**) está **desactivada en la BIOS/UEFI** del servidor, que es como suele venir de fábrica en algunos equipos. Se corrige activándola en la configuración del firmware y reiniciando. Es un fallo de configuración, no de hardware ni de licencia [INTEL-SDM].
 
 ### 1.3. Hipervisores y su clasificación
 
-La clasificación de los monitores de máquina virtual en dos tipos procede de Goldberg (1973) y es la taxonomía más preguntada del tema [GOLDBERG73]. El criterio de clasificación es **sobre qué se ejecuta el hipervisor**: directamente sobre el hardware, o sobre un sistema operativo anfitrión.
+La clasificación de los monitores de máquina virtual en dos tipos procede de Goldberg (1973) y es la taxonomía central del tema [GOLDBERG73]. El criterio de clasificación es **sobre qué se ejecuta el hipervisor**: directamente sobre el hardware, o sobre un sistema operativo anfitrión.
 
 #### 1.3.1. Hipervisores de Tipo 1 o nativos (bare-metal)
 
@@ -214,7 +214,7 @@ Características:
 
 Ejemplos habituales: **VMware ESXi** [VMWARE-DOC], **Microsoft Hyper-V** en su rol de servidor [HYPERV-DOC], **Xen** [XEN-DOC], **KVM** sobre Linux [KVM-DOC], y distribuciones que los integran como **Proxmox VE** [PROXMOX] u **oVirt** [OVIRT].
 
-> **[DATO CLAVE EXAMEN]** **KVM es un caso de clasificación discutido y muy preguntado.** KVM es un **módulo del núcleo de Linux** que convierte al propio núcleo en hipervisor: puede parecer de Tipo 2 porque hay un Linux completo debajo, pero **se clasifica como Tipo 1**, porque el hipervisor **es** el núcleo y accede al hardware sin intermediarios [KVM-DOC]. Lo mismo ocurre con **Hyper-V**: aunque se activa como un «rol» de Windows Server, al habilitarlo el hipervisor se coloca **por debajo** del sistema, que pasa a ser una partición privilegiada — es de **Tipo 1** [HYPERV-DOC].
+> **[DATO CLAVE]** **KVM es un caso de clasificación discutido.** KVM es un **módulo del núcleo de Linux** que convierte al propio núcleo en hipervisor: puede parecer de Tipo 2 porque hay un Linux completo debajo, pero **se clasifica como Tipo 1**, porque el hipervisor **es** el núcleo y accede al hardware sin intermediarios [KVM-DOC]. Lo mismo ocurre con **Hyper-V**: aunque se activa como un «rol» de Windows Server, al habilitarlo el hipervisor se coloca **por debajo** del sistema, que pasa a ser una partición privilegiada — es de **Tipo 1** [HYPERV-DOC].
 
 #### 1.3.2. Hipervisores de Tipo 2 o alojados (hosted)
 
@@ -240,7 +240,7 @@ Ejemplos habituales: **Oracle VirtualBox**, **VMware Workstation** (Windows/Linu
 | Ámbito natural | **Centro de datos / producción** | **Puesto de trabajo / laboratorio** |
 | Ejemplos | ESXi, Hyper-V, Xen, KVM, Proxmox VE | VirtualBox, Workstation, Fusion, Parallels |
 
-> **[EJEMPLO AYTO MADRID]** En el Ayuntamiento conviven los dos tipos y no compiten entre sí: los servidores del padrón, del registro y de la sede electrónica se ejecutan sobre **hipervisores de Tipo 1** en clúster dentro del centro de proceso de datos, mientras que un técnico de la unidad de desarrollo usa un **hipervisor de Tipo 2** en su propio portátil para levantar una máquina virtual de pruebas y verificar una migración antes de proponerla. Usar un hipervisor de Tipo 2 para un servicio en producción sería un error grave de arquitectura y de seguridad [NIST-SP800-125].
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** En el Ayuntamiento conviven los dos tipos y no compiten entre sí: los servidores del padrón, del registro y de la sede electrónica se ejecutan sobre **hipervisores de Tipo 1** en clúster dentro del centro de proceso de datos, mientras que un técnico de la unidad de desarrollo usa un **hipervisor de Tipo 2** en su propio portátil para levantar una máquina virtual de pruebas y verificar una migración antes de proponerla. Usar un hipervisor de Tipo 2 para un servicio en producción sería un error grave de arquitectura y de seguridad [NIST-SP800-125].
 
 ---
 
@@ -248,7 +248,7 @@ Ejemplos habituales: **Oracle VirtualBox**, **VMware Workstation** (Windows/Linu
 
 ### 2.1. Arquitectura y componentes de un entorno de virtualización de servidores
 
-Un entorno profesional de virtualización de servidores **no es un hipervisor suelto**: es un conjunto de piezas que trabajan coordinadas. Distinguirlas es imprescindible tanto para el examen como para leer cualquier arquitectura real [VMWARE-DOC] [HYPERV-DOC] [OPENSTACK].
+Un entorno profesional de virtualización de servidores **no es un hipervisor suelto**: es un conjunto de piezas que trabajan coordinadas. Distinguirlas es imprescindible para leer cualquier arquitectura real [VMWARE-DOC] [HYPERV-DOC] [OPENSTACK].
 
 **1. Anfitriones o nodos.** Los servidores físicos que ejecutan el hipervisor. Aportan CPU, memoria, interfaces de red y, en algunos modelos, discos locales. Se agrupan en **clúster**.
 
@@ -274,9 +274,9 @@ Un entorno profesional de virtualización de servidores **no es un hipervisor su
 | **RAW** | Genérico | Volcado en bruto, sin metadatos: máximo rendimiento, mínima funcionalidad. |
 | **OVF / OVA** | DMTF (estándar abierto) | **No es un formato de disco**, sino de **empaquetado e intercambio** de máquinas virtuales: descriptor XML + discos. OVA es el mismo contenido en un único fichero comprimido. |
 
-> **[DATO CLAVE EXAMEN]** Distinguir **aprovisionamiento fino** (*thin provisioning*) de **grueso** (*thick*): en el fino el disco virtual **ocupa en la cabina solo lo realmente escrito** y crece bajo demanda —ahorra mucho espacio, pero **exige vigilar el sobreaprovisionamiento**, porque si la cabina se llena las máquinas virtuales se detienen—; en el grueso se **reserva todo el espacio desde el principio**, con rendimiento más predecible y sin riesgo de agotamiento sorpresivo [VMWARE-DOC].
+> **[DATO CLAVE]** Distinguir **aprovisionamiento fino** (*thin provisioning*) de **grueso** (*thick*): en el fino el disco virtual **ocupa en la cabina solo lo realmente escrito** y crece bajo demanda —ahorra mucho espacio, pero **exige vigilar el sobreaprovisionamiento**, porque si la cabina se llena las máquinas virtuales se detienen—; en el grueso se **reserva todo el espacio desde el principio**, con rendimiento más predecible y sin riesgo de agotamiento sorpresivo [VMWARE-DOC].
 
-> **[DATO CLAVE EXAMEN]** Una **instantánea no es una copia de seguridad**. La instantánea congela un punto en el tiempo y a partir de ahí los cambios se escriben en **ficheros delta** que crecen; si se acumulan o se olvidan, **degradan el rendimiento y pueden llenar el almacenamiento**. Además reside en el mismo sistema que la máquina virtual: si se pierde la cabina, se pierden las instantáneas. Sirven para revertir un cambio a corto plazo (una actualización, un despliegue), no para proteger datos (§5.3).
+> **[DATO CLAVE]** Una **instantánea no es una copia de seguridad**. La instantánea congela un punto en el tiempo y a partir de ahí los cambios se escriben en **ficheros delta** que crecen; si se acumulan o se olvidan, **degradan el rendimiento y pueden llenar el almacenamiento**. Además reside en el mismo sistema que la máquina virtual: si se pierde la cabina, se pierden las instantáneas. Sirven para revertir un cambio a corto plazo (una actualización, un despliegue), no para proteger datos (§5.3).
 
 ### 2.2. Asignación y gestión de recursos del sistema
 
@@ -297,11 +297,11 @@ Los hipervisores ofrecen además tres controles clásicos, presentes con distint
 - **Límite** (*limit*): máximo que la máquina virtual podrá consumir **aunque haya recursos libres**.
 - **Peso o participación** (*shares*): prioridad **relativa** para repartir el recurso **solo cuando hay contención**.
 
-> **[EJERCICIO RESUELTO]** *Un anfitrión tiene 2 procesadores de 16 núcleos físicos cada uno (32 núcleos, 64 hilos con multihilo simultáneo). Se quieren alojar máquinas virtuales de 4 vCPU con una ratio de consolidación de 4 vCPU por núcleo físico. ¿Cuántas máquinas caben?* **Solución**: capacidad total = 32 núcleos × 4 = **128 vCPU asignables**; a 4 vCPU por máquina, **32 máquinas virtuales**. Advertencias que el examen suele exigir: la ratio depende críticamente del **perfil de carga** (4:1 es razonable para servidores poco cargados y excesivo para bases de datos); el **multihilo simultáneo no duplica la capacidad real**, solo mejora el aprovechamiento; y debe reservarse margen para que el clúster siga funcionando **con un nodo caído** (regla N+1), lo que en la práctica reduce el número aceptable.
+> **[EJERCICIO RESUELTO]** *Un anfitrión tiene 2 procesadores de 16 núcleos físicos cada uno (32 núcleos, 64 hilos con multihilo simultáneo). Se quieren alojar máquinas virtuales de 4 vCPU con una ratio de consolidación de 4 vCPU por núcleo físico. ¿Cuántas máquinas caben?* **Solución**: capacidad total = 32 núcleos × 4 = **128 vCPU asignables**; a 4 vCPU por máquina, **32 máquinas virtuales**. Advertencias: la ratio depende críticamente del **perfil de carga** (4:1 es razonable para servidores poco cargados y excesivo para bases de datos); el **multihilo simultáneo no duplica la capacidad real**, solo mejora el aprovechamiento; y debe reservarse margen para que el clúster siga funcionando **con un nodo caído** (regla N+1), lo que en la práctica reduce el número aceptable.
 
 #### 2.2.1. Planificación de CPU y gestión de memoria virtualizada
 
-**Planificación de CPU.** El hipervisor presenta a cada máquina virtual una o varias **CPU virtuales** (**vCPU**), que no son núcleos dedicados sino **entidades planificables** que compiten por tiempo de núcleo físico, exactamente igual que los procesos compiten por la CPU en un sistema operativo convencional [KVM-DOC] [VMWARE-DOC]. Conceptos que se preguntan:
+**Planificación de CPU.** El hipervisor presenta a cada máquina virtual una o varias **CPU virtuales** (**vCPU**), que no son núcleos dedicados sino **entidades planificables** que compiten por tiempo de núcleo físico, exactamente igual que los procesos compiten por la CPU en un sistema operativo convencional [KVM-DOC] [VMWARE-DOC]. Conceptos clave:
 
 - **Tiempo de espera** (*CPU ready* o `%RDY`): porcentaje de tiempo que una vCPU está **lista para ejecutarse pero esperando** un núcleo libre. Es **el indicador de contención de CPU por excelencia**: valores sostenidamente altos significan que el anfitrión está sobrecargado, aunque la utilización de CPU no parezca extrema.
 - **Coplanificación** (*co-scheduling*): una máquina virtual con varias vCPU necesita que sus vCPU avancen **de forma razonablemente sincronizada**, porque el sistema huésped supone que sus procesadores progresan a la vez. Los hipervisores modernos aplican una **coplanificación relajada**, que no exige arrancarlas todas simultáneamente pero sí corregir las desviaciones (*skew*) entre ellas.
@@ -320,9 +320,9 @@ Los hipervisores ofrecen además tres controles clásicos, presentes con distint
 - **Página grande** (*large pages*, 2 MB frente a 4 KB): reduce el número de entradas de traducción y mejora el rendimiento, pero **inhibe la compartición de páginas idénticas**, porque es muy improbable que dos páginas de 2 MB sean idénticas.
 - **Adición en caliente** (*hot-add*) de memoria y vCPU: algunos huéspedes admiten ampliar recursos sin apagar la máquina virtual, lo que reduce las ventanas de parada.
 
-> **[DATO CLAVE EXAMEN]** El orden de las cuatro técnicas de recuperación de memoria, de menos a más dañina: **compartición de páginas → globo → compresión → intercambio a disco**. Y la asimetría fundamental del reparto de recursos: **sobreasignar CPU degrada; sobreasignar memoria rompe**.
+> **[DATO CLAVE]** El orden de las cuatro técnicas de recuperación de memoria, de menos a más dañina: **compartición de páginas → globo → compresión → intercambio a disco**. Y la asimetría fundamental del reparto de recursos: **sobreasignar CPU degrada; sobreasignar memoria rompe**.
 
-> **[EJEMPLO AYTO MADRID]** En el clúster municipal, un servidor de consultas del padrón muestra un tiempo de espera de CPU del 18 % en horario de atención al público, con la utilización del anfitrión en torno al 55 %. El diagnóstico no es «falta CPU» sino **exceso de vCPU asignadas** en varias máquinas del mismo anfitrión: hay más entidades planificables que huecos, y todas esperan. La corrección es reducir las vCPU sobredimensionadas y redistribuir máquinas entre nodos, no comprar más servidores.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** En el clúster municipal, un servidor de consultas del padrón muestra un tiempo de espera de CPU del 18 % en horario de atención al público, con la utilización del anfitrión en torno al 55 %. El diagnóstico no es «falta CPU» sino **exceso de vCPU asignadas** en varias máquinas del mismo anfitrión: hay más entidades planificables que huecos, y todas esperan. La corrección es reducir las vCPU sobredimensionadas y redistribuir máquinas entre nodos, no comprar más servidores.
 
 #### 2.2.2. Entradas y salidas y controladores paravirtualizados
 
@@ -343,9 +343,9 @@ La **E/S es el punto donde más se nota la virtualización**, porque cada acceso
 | *Passthrough* | Muy alto | **IOMMU** | Normalmente **no** | GPU, tarjetas especiales, criptografía |
 | **SR-IOV** | Muy alto | IOMMU + tarjeta compatible | Normalmente **no** | Red de muy alto rendimiento, NFV |
 
-> **[DATO CLAVE EXAMEN]** **virtio es paravirtualización**, aunque el huésped no esté paravirtualizado. Esta es la razón por la que la afirmación «la paravirtualización ya no se usa» es falsa en un examen: no se paravirtualiza el **núcleo**, pero sí los **dispositivos**, y eso está en casi todas las máquinas virtuales en producción [VIRTIO].
+> **[DATO CLAVE]** **virtio es paravirtualización**, aunque el huésped no esté paravirtualizado. Esta es la razón por la que la afirmación «la paravirtualización ya no se usa» es falsa: no se paravirtualiza el **núcleo**, pero sí los **dispositivos**, y eso está en casi todas las máquinas virtuales en producción [VIRTIO].
 
-> **[REFERENCIA CRUZADA]** Los **periféricos, sus interfaces y los elementos de almacenamiento** en su dimensión física se estudian en el **Tema 12**; los **sistemas de almacenamiento y su virtualización**, junto con las políticas de copia de seguridad, corresponden al **Tema 26**. Aquí interesa exclusivamente **cómo el hipervisor entrega esos recursos a la máquina virtual**.
+> **[RELACIÓN CON OTROS TEMAS]** Los **periféricos, sus interfaces y los elementos de almacenamiento** en su dimensión física se estudian en el **Tema 12**; los **sistemas de almacenamiento y su virtualización**, junto con las políticas de copia de seguridad, corresponden al **Tema 26**. Aquí interesa exclusivamente **cómo el hipervisor entrega esos recursos a la máquina virtual**.
 
 ### 2.3. Virtualización basada en contenedores y aislamiento de procesos
 
@@ -371,7 +371,7 @@ Como respuesta a la primera de estas debilidades han aparecido los **contenedore
 
 #### 2.3.1. Comparativa entre virtualización basada en hipervisor y contenedores
 
-Es la comparación más preguntada del tema después de la clasificación de hipervisores:
+Es, junto con la clasificación de hipervisores, la comparación central del tema:
 
 | Criterio | **Máquina virtual (hipervisor)** | **Contenedor** |
 |---|---|---|
@@ -387,9 +387,9 @@ Es la comparación más preguntada del tema después de la clasificación de hip
 | Portabilidad | Alta (imagen pesada) | **Muy alta** (imagen ligera y estándar) |
 | Caso de uso natural | Cargas heredadas, sistemas heterogéneos, servicios monolíticos, aislamiento exigente | Microservicios, despliegue continuo, escalado elástico |
 
-> **[DATO CLAVE EXAMEN]** Dos afirmaciones que se preguntan una y otra vez: (1) **los contenedores no sustituyen a las máquinas virtuales, se apoyan en ellas**: en la práctica totalidad de las instalaciones reales, y en toda la nube pública, los nodos que ejecutan contenedores **son máquinas virtuales**; (2) **un contenedor no puede ejecutar un sistema operativo distinto del núcleo del anfitrión** — cuando se ven contenedores Linux en un equipo Windows, lo que hay por debajo es una **máquina virtual Linux ligera** que los aloja [NIST-SP800-190].
+> **[DATO CLAVE]** Dos afirmaciones clave: (1) **los contenedores no sustituyen a las máquinas virtuales, se apoyan en ellas**: en la práctica totalidad de las instalaciones reales, y en toda la nube pública, los nodos que ejecutan contenedores **son máquinas virtuales**; (2) **un contenedor no puede ejecutar un sistema operativo distinto del núcleo del anfitrión** — cuando se ven contenedores Linux en un equipo Windows, lo que hay por debajo es una **máquina virtual Linux ligera** que los aloja [NIST-SP800-190].
 
-> **[EJEMPLO AYTO MADRID]** La sede electrónica municipal se moderniza dividiendo el portal en varios servicios pequeños empaquetados en contenedores, mientras que el gestor de expedientes heredado, con dependencias antiguas y certificado por su fabricante sobre un sistema operativo concreto, permanece como **máquina virtual**. Los nodos que ejecutan los contenedores son, a su vez, máquinas virtuales del mismo clúster: la Administración no elige entre las dos tecnologías, las **estratifica**.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** La sede electrónica municipal se moderniza dividiendo el portal en varios servicios pequeños empaquetados en contenedores, mientras que el gestor de expedientes heredado, con dependencias antiguas y certificado por su fabricante sobre un sistema operativo concreto, permanece como **máquina virtual**. Los nodos que ejecutan los contenedores son, a su vez, máquinas virtuales del mismo clúster: la Administración no elige entre las dos tecnologías, las **estratifica**.
 
 ### 2.4. Alta disponibilidad, balanceo y migración en caliente de sistemas
 
@@ -404,7 +404,7 @@ La virtualización de servidores alcanza su máximo valor cuando el clúster dej
 
 Existe también la variante de **poscopia**, que conmuta primero y trae las páginas bajo demanda: reduce la parada total pero deja la máquina expuesta a un fallo de red durante la transferencia. La precopia es la usada por defecto.
 
-**Requisitos de la migración en caliente**, que es una pregunta de examen muy habitual:
+**Requisitos de la migración en caliente**:
 
 - **Compatibilidad de CPU** entre origen y destino (mismo fabricante y conjunto de características, o uso de un modo de compatibilidad que enmascare las diferencias).
 - **Red compartida** y una **red dedicada** de suficiente ancho de banda para la migración.
@@ -428,9 +428,9 @@ Además de la migración de cómputo, existe la **migración de almacenamiento**
 - **Gestión de energía** (*DPM*): en horas valle, el clúster concentra las máquinas en menos anfitriones y **apaga los sobrantes**, encendiéndolos de nuevo cuando la carga sube (§5.4).
 - **Modo mantenimiento**: antes de parchear un anfitrión, se le marca en mantenimiento y el clúster **vacía automáticamente** todas sus máquinas virtuales hacia otros nodos, en caliente. Esta es la razón por la que en un entorno virtualizado bien diseñado **el mantenimiento del hardware deja de requerir ventanas de parada del servicio**.
 
-> **[DATO CLAVE EXAMEN]** Diferenciar con precisión: **migración en caliente** = movimiento **planificado** sin corte; **HA** = respuesta **no planificada** a un fallo, **con reinicio y por tanto con corte**; **FT** = respuesta no planificada **sin corte**, mediante copia en espejo, a un coste muy superior. Confundir HA con FT es el error más frecuente en este bloque.
+> **[DATO CLAVE]** Diferenciar con precisión: **migración en caliente** = movimiento **planificado** sin corte; **HA** = respuesta **no planificada** a un fallo, **con reinicio y por tanto con corte**; **FT** = respuesta no planificada **sin corte**, mediante copia en espejo, a un coste muy superior. Confundir HA con FT es el error más frecuente en este bloque.
 
-> **[EJEMPLO AYTO MADRID]** El clúster municipal aloja en pareja los servidores del registro de entrada. Una **regla de antiafinidad** garantiza que los dos nodos del par nunca se ejecuten en el mismo anfitrión; una política de **HA** los reinicia automáticamente si cae un servidor físico; y el **modo mantenimiento** permite parchear los anfitriones un martes por la mañana, sin ventana nocturna y sin que la ciudadanía perciba nada, porque las máquinas se han migrado en caliente antes de reiniciar el equipo.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** El clúster municipal aloja en pareja los servidores del registro de entrada. Una **regla de antiafinidad** garantiza que los dos nodos del par nunca se ejecuten en el mismo anfitrión; una política de **HA** los reinicia automáticamente si cae un servidor físico; y el **modo mantenimiento** permite parchear los anfitriones un martes por la mañana, sin ventana nocturna y sin que la ciudadanía perciba nada, porque las máquinas se han migrado en caliente antes de reiniciar el equipo.
 
 ---
 
@@ -465,7 +465,7 @@ Los modelos disponibles son cuatro, y el enunciado del tema pide desarrollar los
 | **Virtualización de aplicaciones** | Servidor **o** puesto local | **Solo la aplicación**, empaquetada aislada | Aplicación aislada del sistema |
 | **Virtualización en el cliente** | **En el propio equipo del usuario** | Máquina virtual local (hipervisor de Tipo 1 o 2 en el puesto) | Alto, pero sin centralización |
 
-> **[DATO CLAVE EXAMEN]** No confundir **cliente ligero** con **VDI**: el **cliente ligero** (*thin client*) es el **dispositivo terminal** —hardware reducido, sin disco relevante, con un sistema mínimo cuya única función es ejecutar el cliente de conexión—; **VDI** es la **arquitectura del lado del servidor**. Se puede hacer VDI con clientes ligeros, con PC completos reutilizados (*repurposed*), con clientes cero (*zero client*, con el protocolo implementado en circuitería) o con un navegador (*HTML5*).
+> **[DATO CLAVE]** No confundir **cliente ligero** con **VDI**: el **cliente ligero** (*thin client*) es el **dispositivo terminal** —hardware reducido, sin disco relevante, con un sistema mínimo cuya única función es ejecutar el cliente de conexión—; **VDI** es la **arquitectura del lado del servidor**. Se puede hacer VDI con clientes ligeros, con PC completos reutilizados (*repurposed*), con clientes cero (*zero client*, con el protocolo implementado en circuitería) o con un navegador (*HTML5*).
 
 #### 3.1.1. Infraestructura de escritorios virtuales en servidor (VDI)
 
@@ -486,7 +486,7 @@ El **dimensionamiento** de una plataforma VDI se hace por **perfiles de usuario*
 | **Medio** | Ofimática intensa, varias aplicaciones de gestión, muchas pestañas, vídeo ocasional | 2-4 vCPU / 8 GB |
 | **Avanzado** | Cartografía, diseño, análisis de datos, vídeo | 4-8 vCPU / 16 GB **y GPU virtual** |
 
-> **[DATO CLAVE EXAMEN]** El fenómeno que hunde una plataforma VDI mal dimensionada tiene nombre propio: la **tormenta de arranque** (*boot storm*), y su variante la **tormenta de inicio de sesión** (*login storm*). A las 8:00 todos los empleados encienden a la vez, y cientos de escritorios arrancan, cargan perfiles y actualizan el antivirus **simultáneamente**, provocando un pico de E/S de lectura y escritura que el almacenamiento debe absorber. Mitigaciones: **almacenamiento de estado sólido**, encendido escalonado y preencendido programado de escritorios, cachés de lectura de la imagen maestra, análisis antivirus desfasado en el tiempo y con exclusiones adecuadas, y clones instantáneos que comparten la memoria y el disco de una máquina plantilla ya arrancada.
+> **[DATO CLAVE]** El fenómeno que hunde una plataforma VDI mal dimensionada tiene nombre propio: la **tormenta de arranque** (*boot storm*), y su variante la **tormenta de inicio de sesión** (*login storm*). A las 8:00 todos los empleados encienden a la vez, y cientos de escritorios arrancan, cargan perfiles y actualizan el antivirus **simultáneamente**, provocando un pico de E/S de lectura y escritura que el almacenamiento debe absorber. Mitigaciones: **almacenamiento de estado sólido**, encendido escalonado y preencendido programado de escritorios, cachés de lectura de la imagen maestra, análisis antivirus desfasado en el tiempo y con exclusiones adecuadas, y clones instantáneos que comparten la memoria y el disco de una máquina plantilla ya arrancada.
 
 #### 3.1.2. Escritorios basados en sesiones y terminal server
 
@@ -509,7 +509,7 @@ Se puede entregar de dos formas:
 | Compatibilidad de aplicaciones | La del sistema de **cliente** | La del sistema de **servidor**: algunas aplicaciones no están certificadas |
 | Caso de uso natural | Usuarios con necesidades específicas, cargas pesadas, perfiles con requisitos de aislamiento | **Colectivos numerosos y homogéneos** con un conjunto fijo de aplicaciones |
 
-> **[EJEMPLO AYTO MADRID]** El colectivo de las oficinas de atención a la ciudadanía usa siempre las mismas cuatro aplicaciones (padrón, registro, gestor de expedientes y ofimática) y no instala software: es el caso de libro del modelo de **sesiones**, mucho más barato y denso. En cambio, la unidad de cartografía y planeamiento, que trabaja con sistemas de información geográfica y necesita aceleración gráfica y personalización, encaja en **VDI con GPU virtual** [NVIDIA-VGPU]. Una plataforma municipal realista **combina ambos modelos** y asigna cada colectivo al que le corresponde.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** El colectivo de las oficinas de atención a la ciudadanía usa siempre las mismas cuatro aplicaciones (padrón, registro, gestor de expedientes y ofimática) y no instala software: es el caso de libro del modelo de **sesiones**, mucho más barato y denso. En cambio, la unidad de cartografía y planeamiento, que trabaja con sistemas de información geográfica y necesita aceleración gráfica y personalización, encaja en **VDI con GPU virtual** [NVIDIA-VGPU]. Una plataforma municipal realista **combina ambos modelos** y asigna cada colectivo al que le corresponde.
 
 #### 3.1.3. Virtualización de aplicaciones
 
@@ -526,7 +526,7 @@ Tecnologías representativas: **Microsoft App-V** y su sucesor **MSIX app attach
 
 **Límites**: no toda aplicación es virtualizable —las que instalan controladores en modo núcleo, servicios de sistema profundos o componentes de bajo nivel suelen quedar fuera—, y el **empaquetado inicial tiene un coste** de trabajo técnico y de pruebas que hay que contabilizar.
 
-> **[DATO CLAVE EXAMEN]** Ordenar los tres modelos por **lo que se virtualiza**: en **VDI** se virtualiza **la máquina** (una VM completa por usuario); en **sesiones** se virtualiza **el sistema operativo** (una sesión por usuario dentro de un sistema compartido); en **virtualización de aplicaciones** se virtualiza **la aplicación** (una burbuja aislada dentro del sistema del usuario). No son excluyentes: lo normal es usar virtualización de aplicaciones **dentro** de un escritorio VDI o de sesiones.
+> **[DATO CLAVE]** Ordenar los tres modelos por **lo que se virtualiza**: en **VDI** se virtualiza **la máquina** (una VM completa por usuario); en **sesiones** se virtualiza **el sistema operativo** (una sesión por usuario dentro de un sistema compartido); en **virtualización de aplicaciones** se virtualiza **la aplicación** (una burbuja aislada dentro del sistema del usuario). No son excluyentes: lo normal es usar virtualización de aplicaciones **dentro** de un escritorio VDI o de sesiones.
 
 ### 3.2. Componentes de la arquitectura VDI
 
@@ -555,7 +555,7 @@ El **broker de conexiones** (*connection broker*, *Delivery Controller* en Citri
 6. **Gestionar la reconexión**: si el usuario pierde la conexión o cambia de terminal, el broker debe devolverle **su sesión existente**, no una nueva. Esta capacidad, la **itinerancia de sesión** (*session roaming*), es la que permite a un empleado empezar en una oficina y continuar en otra sin perder lo que estaba haciendo.
 7. **Gestionar el ciclo de vida y el equilibrio de carga** del conjunto: mantener escritorios preencendidos para atender picos, apagar los sobrantes y aplicar tiempos de espera de desconexión y de cierre de sesión.
 
-> **[DATO CLAVE EXAMEN]** Dos matices sobre el broker que se preguntan a menudo: (1) **el broker interviene en el establecimiento, no en el tráfico**: una vez asignado el escritorio, el flujo del protocolo va **directamente** entre el cliente y el escritorio (o a través de la pasarela), de modo que el broker no es un cuello de botella de ancho de banda; (2) **es un punto único de fallo**: si el broker no está disponible, **nadie puede iniciar sesiones nuevas** (aunque las existentes sigan vivas), por lo que se despliega siempre **redundado y balanceado**, con su base de datos en alta disponibilidad.
+> **[DATO CLAVE]** Dos matices sobre el broker: (1) **el broker interviene en el establecimiento, no en el tráfico**: una vez asignado el escritorio, el flujo del protocolo va **directamente** entre el cliente y el escritorio (o a través de la pasarela), de modo que el broker no es un cuello de botella de ancho de banda; (2) **es un punto único de fallo**: si el broker no está disponible, **nadie puede iniciar sesiones nuevas** (aunque las existentes sigan vivas), por lo que se despliega siempre **redundado y balanceado**, con su base de datos en alta disponibilidad.
 
 #### 3.2.2. Gestor de imágenes, plantillas y aprovisionamiento
 
@@ -570,9 +570,9 @@ A partir de ella se aprovisionan los escritorios con distintas técnicas [HORIZO
 | **Clon instantáneo** (*instant clone*) | Se deriva de una máquina plantilla **ya arrancada en memoria**: el escritorio nuevo está disponible en segundos y comparte también páginas de memoria | **Muy bajo** | Conjuntos no persistentes grandes, mitiga la tormenta de arranque |
 | **Aprovisionamiento por arranque en red** (*streaming*) | El escritorio **no tiene disco propio**: arranca por red desde una imagen central compartida y usa un disco de escritura temporal | Muy bajo | Grandes conjuntos homogéneos |
 
-El **ciclo de vida de la imagen** es lo que se pregunta en los casos prácticos: se **clona** la imagen maestra a una copia de trabajo; se **aplican** parches, actualizaciones y cambios de aplicaciones; se **prueba** con un grupo piloto; se **sella** creando una nueva versión; se **publica** al conjunto de escritorios; y los escritorios no persistentes **adoptan la nueva versión en su siguiente reinicio**. Si la versión resulta defectuosa, se **revierte** a la versión anterior con la misma operación. Este mecanismo, y no otro, es el que convierte la gestión de mil puestos en la gestión de una imagen versionada.
+El **ciclo de vida de la imagen** es el siguiente: se **clona** la imagen maestra a una copia de trabajo; se **aplican** parches, actualizaciones y cambios de aplicaciones; se **prueba** con un grupo piloto; se **sella** creando una nueva versión; se **publica** al conjunto de escritorios; y los escritorios no persistentes **adoptan la nueva versión en su siguiente reinicio**. Si la versión resulta defectuosa, se **revierte** a la versión anterior con la misma operación. Este mecanismo, y no otro, es el que convierte la gestión de mil puestos en la gestión de una imagen versionada.
 
-> **[EJEMPLO AYTO MADRID]** Ante la publicación de una actualización de seguridad crítica del sistema operativo del puesto, el equipo de sistemas aplica el parche **una sola vez** sobre la imagen maestra, la valida con veinte usuarios piloto de un distrito durante una jornada y la publica esa noche. A la mañana siguiente, los escritorios no persistentes de todas las oficinas arrancan ya parcheados, sin desplazamientos, sin despliegue por equipos y sin puestos rezagados. La trazabilidad de la operación —quién publicó qué versión y cuándo— queda registrada, lo que da soporte directo a las medidas de gestión de cambios y de mantenimiento del **ENS** (§5.1).
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Ante la publicación de una actualización de seguridad crítica del sistema operativo del puesto, el equipo de sistemas aplica el parche **una sola vez** sobre la imagen maestra, la valida con veinte usuarios piloto de un distrito durante una jornada y la publica esa noche. A la mañana siguiente, los escritorios no persistentes de todas las oficinas arrancan ya parcheados, sin desplazamientos, sin despliegue por equipos y sin puestos rezagados. La trazabilidad de la operación —quién publicó qué versión y cuándo— queda registrada, lo que da soporte directo a las medidas de gestión de cambios y de mantenimiento del **ENS** (§5.1).
 
 ### 3.3. Protocolos de representación y transporte para el puesto de trabajo
 
@@ -598,9 +598,9 @@ Principales protocolos:
 - **Redirección de periféricos** por canales virtuales: impresoras, unidades locales, lectores de tarjeta inteligente (imprescindibles para la **firma electrónica** con certificado en tarjeta), escáneres y dispositivos USB. Cada redirección habilitada es también **una vía potencial de fuga de información**, y por eso se controla por política (§5.2).
 - **Adaptación a la latencia**: la calidad percibida depende más de la **latencia de ida y vuelta** y de la **estabilidad** (fluctuación o *jitter*) que del ancho de banda bruto. Un enlace de mucho caudal pero con latencia alta da una experiencia peor que uno modesto y estable.
 
-> **[REFERENCIA CRUZADA]** No debe confundirse el **protocolo de representación de un puesto virtual**, que es lo que aquí se trata, con el **control remoto del puesto de usuario para dar soporte y resolver incidencias**, que es materia del **Tema 29**: aunque ambos transporten la imagen de una pantalla, el primero es el medio ordinario de trabajo del empleado y el segundo es una intervención excepcional de un técnico sobre la sesión de otra persona, con las garantías que ello exige (§5.2).
+> **[RELACIÓN CON OTROS TEMAS]** No debe confundirse el **protocolo de representación de un puesto virtual**, que es lo que aquí se trata, con el **control remoto del puesto de usuario para dar soporte y resolver incidencias**, que es materia del **Tema 29**: aunque ambos transporten la imagen de una pantalla, el primero es el medio ordinario de trabajo del empleado y el segundo es una intervención excepcional de un técnico sobre la sesión de otra persona, con las garantías que ello exige (§5.2).
 
-> **[DATO CLAVE EXAMEN]** El consumo de ancho de banda por sesión depende sobre todo del **contenido en movimiento**: una sesión de ofimática y aplicación de gestión consume poco y de forma discontinua; una sesión con vídeo a pantalla completa o cartografía consume un orden de magnitud más. Por eso el dimensionamiento de una plataforma VDI se hace **por perfil de usuario**, y por eso **el enlace de la oficina remota es tan crítico como el servidor**.
+> **[DATO CLAVE]** El consumo de ancho de banda por sesión depende sobre todo del **contenido en movimiento**: una sesión de ofimática y aplicación de gestión consume poco y de forma discontinua; una sesión con vídeo a pantalla completa o cartografía consume un orden de magnitud más. Por eso el dimensionamiento de una plataforma VDI se hace **por perfil de usuario**, y por eso **el enlace de la oficina remota es tan crítico como el servidor**.
 
 ### 3.4. Estrategias de persistencia: escritorios dedicados y no dedicados
 
@@ -636,7 +636,7 @@ La decisión de persistencia es **la más determinante del diseño de una plataf
 
 > **[EJERCICIO RESUELTO]** *Una organización despliega 500 escritorios no persistentes. Los usuarios se quejan de que pierden las firmas del correo, los favoritos del navegador y los ficheros que dejan en el escritorio. ¿Dónde está el error de diseño y cómo se corrige?* **Solución**: el error **no está en la elección del modelo**, que es correcta para 500 puestos homogéneos, sino en haberlo desplegado **sin la gestión de perfil que el modelo exige**. Corrección: implantar un **contenedor de perfil de usuario** en disco virtual que se monte al iniciar sesión, **redirigir las carpetas personales** a un recurso de red centralizado y respaldado, y aplicar la configuración del entorno **por directiva** en cada inicio. Con esas tres piezas el escritorio sigue siendo desechable y el usuario conserva su entorno.
 
-> **[EJEMPLO AYTO MADRID]** Para las oficinas de atención a la ciudadanía, el Ayuntamiento elige escritorios **no persistentes** con contenedor de perfil: el puesto se recrea limpio cada noche, se parchea desde una única imagen y ningún dato queda en el terminal, lo que refuerza la confidencialidad de los datos del padrón que se manejan en el mostrador. Para el personal técnico de sistemas y desarrollo, que necesita instalar herramientas propias, se reserva un conjunto reducido de escritorios **dedicados** con normas de uso específicas.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Para las oficinas de atención a la ciudadanía, el Ayuntamiento elige escritorios **no persistentes** con contenedor de perfil: el puesto se recrea limpio cada noche, se parchea desde una única imagen y ningún dato queda en el terminal, lo que refuerza la confidencialidad de los datos del padrón que se manejan en el mostrador. Para el personal técnico de sistemas y desarrollo, que necesita instalar herramientas propias, se reserva un conjunto reducido de escritorios **dedicados** con normas de uso específicas.
 
 ---
 
@@ -646,7 +646,7 @@ La decisión de persistencia es **la más determinante del diseño de una plataf
 
 La **virtualización del almacenamiento** consiste en interponer una capa lógica entre los servidores y los dispositivos físicos de almacenamiento, de modo que aquellos consuman **volúmenes lógicos** cuya composición, ubicación y tecnología subyacente desconocen [SNIA-SSM]. Igual que el hipervisor abstrae la CPU y la memoria, esta capa abstrae los discos: permite **agrupar** dispositivos heterogéneos en un mismo conjunto, **mover datos en caliente** entre ellos y aplicar servicios comunes con independencia del fabricante.
 
-> **[REFERENCIA CRUZADA]** Los **sistemas de almacenamiento y su virtualización** son objeto propio del **Tema 26**, junto con las políticas y procedimientos de **copia de seguridad y recuperación**. Este epígrafe se limita a lo que la virtualización de sistemas y de puestos **necesita** del almacenamiento y a cómo lo consume; el detalle de tecnologías, cabinas y procedimientos de respaldo corresponde a aquel tema. Las **redes de área local** y los dispositivos de interconexión se estudian en los **Temas 30 y 37**.
+> **[RELACIÓN CON OTROS TEMAS]** Los **sistemas de almacenamiento y su virtualización** son objeto propio del **Tema 26**, junto con las políticas y procedimientos de **copia de seguridad y recuperación**. Este epígrafe se limita a lo que la virtualización de sistemas y de puestos **necesita** del almacenamiento y a cómo lo consume; el detalle de tecnologías, cabinas y procedimientos de respaldo corresponde a aquel tema. Las **redes de área local** y los dispositivos de interconexión se estudian en los **Temas 30 y 37**.
 
 **Modelos de acceso** que un entorno virtualizado utiliza:
 
@@ -677,7 +677,7 @@ La **virtualización del almacenamiento** consiste en interponer una capa lógic
 | Puntos fuertes | Rendimiento y funciones muy maduras; escalado independiente | **Simplicidad**, despliegue rápido, escalado horizontal predecible |
 | Puntos débiles | Complejidad, coste de la red de almacenamiento, riesgo de concentración en la cabina | Cómputo y almacenamiento **acoplados**; dependencia fuerte de la red entre nodos |
 
-> **[DATO CLAVE EXAMEN]** La **hiperconvergencia** es el modelo que mejor encaja con **VDI**, y la razón se pregunta a menudo: los escritorios virtuales generan un patrón de E/S muy exigente y muy repetitivo, y HCI lo atiende con **almacenamiento local rápido en el propio nodo** —evitando el rodeo por la red de almacenamiento— y con **deduplicación** de un contenido que es casi idéntico entre escritorios. Además, su crecimiento **por nodos** encaja con un despliegue VDI que se amplía por bloques de usuarios.
+> **[DATO CLAVE]** La **hiperconvergencia** es el modelo que mejor encaja con **VDI**, y la razón es esta: los escritorios virtuales generan un patrón de E/S muy exigente y muy repetitivo, y HCI lo atiende con **almacenamiento local rápido en el propio nodo** —evitando el rodeo por la red de almacenamiento— y con **deduplicación** de un contenido que es casi idéntico entre escritorios. Además, su crecimiento **por nodos** encaja con un despliegue VDI que se amplía por bloques de usuarios.
 
 ### 4.2. Virtualización de redes y redes definidas por software (SDN)
 
@@ -698,16 +698,16 @@ Consecuencia práctica: la red lógica **viaja con la máquina virtual**. Se pue
 - **Capa de aplicación**: las aplicaciones y las políticas de negocio o de seguridad.
 - **Interfaz norte** (*northbound*): la interfaz de programación por la que las aplicaciones expresan **qué** quieren de la red.
 - **Capa de control**: el **controlador**, que mantiene una **visión global** de la topología y traduce esas intenciones en reglas concretas.
-- **Interfaz sur** (*southbound*): el protocolo con el que el controlador programa los dispositivos (**OpenFlow** es el histórico y el que se cita en el examen).
+- **Interfaz sur** (*southbound*): el protocolo con el que el controlador programa los dispositivos (**OpenFlow** es el histórico y el más citado).
 - **Capa de infraestructura**: conmutadores físicos y virtuales que solo reenvían según las reglas recibidas.
 
 Estrechamente emparentada está la **virtualización de funciones de red (NFV)**, que sustituye equipamiento dedicado —cortafuegos, balanceadores, encaminadores, optimizadores— por **funciones software ejecutadas en máquinas virtuales o contenedores** sobre hardware genérico, gestionadas por un marco de orquestación normalizado por ETSI (**NFV-MANO**) [ETSI-NFV]. Y de la combinación de superposición y control centralizado nace la capacidad que más ha cambiado la seguridad del centro de datos: la **microsegmentación**.
 
 **Microsegmentación.** Consiste en aplicar un **cortafuegos distribuido en el propio conmutador virtual, con reglas por máquina virtual**, en lugar de confiar la seguridad únicamente a un cortafuegos perimetral. Su valor está en el tráfico **este-oeste** —el que circula entre servidores dentro del propio centro de datos, que nunca pasa por el perímetro y que es precisamente el que un atacante utiliza para **moverse lateralmente** tras comprometer un primer sistema—. Con microsegmentación, el servidor web puede hablar con el de aplicación **solo por el puerto necesario**, y no puede hablar con los demás servidores web ni con el sistema de nóminas, aunque estén en el mismo segmento [NIST-SP800-125].
 
-> **[DATO CLAVE EXAMEN]** Tres números y una idea: **VLAN → 4.094** segmentos utilizables (12 bits de identificador); **VXLAN → ~16 millones** (24 bits de VNI) sobre UDP [RFC7348]; **SDN → separación de plano de control y plano de datos** con controlador centralizado e interfaces **norte** (hacia las aplicaciones) y **sur** (hacia los dispositivos) [ONF-SDN]. Y la idea: la microsegmentación protege el tráfico **este-oeste**, que es el que el cortafuegos perimetral **no ve**.
+> **[DATO CLAVE]** Tres números y una idea: **VLAN → 4.094** segmentos utilizables (12 bits de identificador); **VXLAN → ~16 millones** (24 bits de VNI) sobre UDP [RFC7348]; **SDN → separación de plano de control y plano de datos** con controlador centralizado e interfaces **norte** (hacia las aplicaciones) y **sur** (hacia los dispositivos) [ONF-SDN]. Y la idea: la microsegmentación protege el tráfico **este-oeste**, que es el que el cortafuegos perimetral **no ve**.
 
-> **[REFERENCIA CRUZADA]** Los fundamentos de **comunicaciones y medios de transmisión** se estudian en el **Tema 33**; el modelo **TCP/IP y OSI** en el **Tema 34**; las **redes locales, su tipología y sus dispositivos de interconexión** en el **Tema 37**; la **administración de redes de área local** en el **Tema 30**; y la **seguridad y protección en redes, la seguridad perimetral y las VPN** en el **Tema 36**. Este epígrafe solo cubre la **capa de red virtualizada** que vive dentro del entorno de virtualización.
+> **[RELACIÓN CON OTROS TEMAS]** Los fundamentos de **comunicaciones y medios de transmisión** se estudian en el **Tema 33**; el modelo **TCP/IP y OSI** en el **Tema 34**; las **redes locales, su tipología y sus dispositivos de interconexión** en el **Tema 37**; la **administración de redes de área local** en el **Tema 30**; y la **seguridad y protección en redes, la seguridad perimetral y las VPN** en el **Tema 36**. Este epígrafe solo cubre la **capa de red virtualizada** que vive dentro del entorno de virtualización.
 
 ### 4.3. Gestión centralizada, monitorización y orquestación de recursos
 
@@ -737,9 +737,9 @@ Un entorno virtualizado sin gestión centralizada es ingobernable: la facilidad 
 
 **Gobierno del ciclo de vida.** El problema operativo más común y menos atendido de los entornos virtualizados es la **proliferación descontrolada** (*VM sprawl*): máquinas creadas para una prueba que nadie apaga, plantillas obsoletas, instantáneas de hace meses, escritorios de personal que ya causó baja. Cada una consume licencias, almacenamiento, ventana de copia de seguridad y, sobre todo, **superficie de ataque sin parchear**. Las contramedidas son de gestión, no técnicas: **etiquetado obligatorio** con responsable y finalidad, **fecha de caducidad** para los entornos temporales, **revisión periódica** de máquinas apagadas y de instantáneas antiguas, y un **procedimiento formal de baja**.
 
-> **[REFERENCIA CRUZADA]** La virtualización es **el sustrato sobre el que se construye la nube**: los modelos de servicio (IaaS, PaaS, SaaS) y de despliegue (nube pública, privada e híbrida), junto con los paradigmas de computación distribuida, corresponden al **Tema 31**. Aquí interesa únicamente la **infraestructura propia** del organismo; cuando esa infraestructura se contrata a un tercero, se añaden las obligaciones de servicios externos y en la nube del ENS (§5.1).
+> **[RELACIÓN CON OTROS TEMAS]** La virtualización es **el sustrato sobre el que se construye la nube**: los modelos de servicio (IaaS, PaaS, SaaS) y de despliegue (nube pública, privada e híbrida), junto con los paradigmas de computación distribuida, corresponden al **Tema 31**. Aquí interesa únicamente la **infraestructura propia** del organismo; cuando esa infraestructura se contrata a un tercero, se añaden las obligaciones de servicios externos y en la nube del ENS (§5.1).
 
-> **[EJEMPLO AYTO MADRID]** Una revisión de inventario del clúster municipal detecta 40 máquinas virtuales apagadas desde hace más de un año, 12 instantáneas con más de seis meses de antigüedad ocupando varios terabytes y tres plantillas con un sistema operativo ya sin soporte. La corrección combina lo técnico y lo organizativo: consolidar y eliminar instantáneas, archivar y dar de baja las máquinas obsoletas previa comprobación con la unidad responsable, retirar las plantillas caducas y **establecer un etiquetado obligatorio** (unidad responsable, aplicación, entorno, fecha de revisión) como requisito para crear cualquier máquina nueva.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Una revisión de inventario del clúster municipal detecta 40 máquinas virtuales apagadas desde hace más de un año, 12 instantáneas con más de seis meses de antigüedad ocupando varios terabytes y tres plantillas con un sistema operativo ya sin soporte. La corrección combina lo técnico y lo organizativo: consolidar y eliminar instantáneas, archivar y dar de baja las máquinas obsoletas previa comprobación con la unidad responsable, retirar las plantillas caducas y **establecer un etiquetado obligatorio** (unidad responsable, aplicación, entorno, fecha de revisión) como requisito para crear cualquier máquina nueva.
 
 ---
 
@@ -760,7 +760,7 @@ El **Esquema Nacional de Seguridad**, regulado por el **Real Decreto 311/2022, d
 - **Medidas de seguridad del Anexo II**, organizadas en **tres marcos**: **organizativo (`org`)**, **operacional (`op`)** y **medidas de protección (`mp`)**, con exigencia creciente según la categoría.
 - **Auditoría y conformidad**: los sistemas de categoría **MEDIA y ALTA** se someten a una **auditoría ordinaria al menos cada dos años** y publican la correspondiente **certificación de conformidad**; los de categoría **BÁSICA** pueden acreditar su conformidad mediante **autoevaluación** y la correspondiente declaración.
 
-> **[DATO CLAVE EXAMEN]** Las **cinco dimensiones** del ENS se recuerdan con las siglas **D-I-C-A-T** (disponibilidad, integridad, confidencialidad, autenticidad, trazabilidad); las **tres categorías**, básica, media y alta; y los **tres marcos** de medidas, `org`, `op` y `mp`. La **auditoría bienal** es obligatoria en categoría **media y alta**, no en básica [ENS].
+> **[DATO CLAVE]** Las **cinco dimensiones** del ENS se recuerdan con las siglas **D-I-C-A-T** (disponibilidad, integridad, confidencialidad, autenticidad, trazabilidad); las **tres categorías**, básica, media y alta; y los **tres marcos** de medidas, `org`, `op` y `mp`. La **auditoría bienal** es obligatoria en categoría **media y alta**, no en básica [ENS].
 
 **Cómo aterriza el ENS en un entorno virtualizado.** El ENS **no dedica un grupo de medidas exclusivo a la virtualización**: son las medidas generales de los tres marcos las que hay que aplicar a los elementos virtuales, entendiendo que el **hipervisor**, la **consola de gestión** y la **red virtual** son componentes del sistema tan reales como un servidor físico. Las implicaciones prácticas más relevantes:
 
@@ -785,7 +785,7 @@ El **Esquema Nacional de Seguridad**, regulado por el **Real Decreto 311/2022, d
 - **Fugas por copia**: la facilidad para clonar o exportar una máquina virtual completa es también una facilidad para **exfiltrar** todos sus datos en un solo fichero.
 - **Canales laterales del hardware compartido**: vulnerabilidades de ejecución especulativa y similares que afectan a la CPU compartida entre máquinas virtuales; se mitigan con microcódigo, parches del hipervisor y, en casos críticos, aislamiento físico.
 
-> **[REFERENCIA CRUZADA]** Los **principios básicos del ENS y del ENI** se desarrollan en el **Tema 39**; los **conceptos generales de seguridad de los sistemas, amenazas, criptografía y firma digital** en el **Tema 32**; la **seguridad perimetral, el acceso remoto seguro y las VPN** en el **Tema 36**; y la **confidencialidad y disponibilidad en el puesto de usuario final y la seguridad en el desarrollo** en el **Tema 25**. Aquí se tratan solo las implicaciones **propias de virtualizar**.
+> **[RELACIÓN CON OTROS TEMAS]** Los **principios básicos del ENS y del ENI** se desarrollan en el **Tema 39**; los **conceptos generales de seguridad de los sistemas, amenazas, criptografía y firma digital** en el **Tema 32**; la **seguridad perimetral, el acceso remoto seguro y las VPN** en el **Tema 36**; y la **confidencialidad y disponibilidad en el puesto de usuario final y la seguridad en el desarrollo** en el **Tema 25**. Aquí se tratan solo las implicaciones **propias de virtualizar**.
 
 ### 5.2. Protección de datos personales y garantías de privacidad (RGPD y LOPDGDD)
 
@@ -813,11 +813,11 @@ La **LOPDGDD**, en su **disposición adicional primera**, remite en el sector p�
 - **Los datos residuales viven en más sitios de los que parece**: instantáneas, ficheros de intercambio del hipervisor, copias de seguridad y réplicas contienen datos personales. El **borrado seguro** y la política de retención deben alcanzarlos a todos; borrar la máquina virtual no borra sus copias.
 - **Minimización aplicada a los entornos de prueba**: clonar una máquina virtual de producción para pruebas **duplica los datos personales reales**. Debe emplearse **seudonimización o datos de prueba**, y la comodidad de clonar no es justificación jurídica suficiente.
 
-> **[EJEMPLO AYTO MADRID]** El equipo de desarrollo pide un clon de la máquina virtual del padrón para probar una migración. La respuesta correcta no es negarse ni acceder sin más: es aplicar el **principio de minimización** clonando el entorno con datos **seudonimizados o sintéticos**, dejar constancia de la autorización, aplicar al clon las mismas medidas de seguridad que al original mientras exista y **fijar su fecha de destrucción**. Un clon de producción olvidado en un entorno de pruebas menos protegido es uno de los orígenes más frecuentes de brecha de datos.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** El equipo de desarrollo pide un clon de la máquina virtual del padrón para probar una migración. La respuesta correcta no es negarse ni acceder sin más: es aplicar el **principio de minimización** clonando el entorno con datos **seudonimizados o sintéticos**, dejar constancia de la autorización, aplicar al clon las mismas medidas de seguridad que al original mientras exista y **fijar su fecha de destrucción**. Un clon de producción olvidado en un entorno de pruebas menos protegido es uno de los orígenes más frecuentes de brecha de datos.
 
 ### 5.3. Continuidad del negocio, copias de seguridad y recuperación ante desastres
 
-> **[REFERENCIA CRUZADA]** Las **políticas, sistemas y procedimientos de copia de seguridad y recuperación**, incluido el respaldo de sistemas físicos y virtuales, constituyen materia propia del **Tema 26**. Este epígrafe cubre únicamente **lo que la virtualización cambia** en la continuidad y la recuperación, y el marco de obligación que impone el ENS.
+> **[RELACIÓN CON OTROS TEMAS]** Las **políticas, sistemas y procedimientos de copia de seguridad y recuperación**, incluido el respaldo de sistemas físicos y virtuales, constituyen materia propia del **Tema 26**. Este epígrafe cubre únicamente **lo que la virtualización cambia** en la continuidad y la recuperación, y el marco de obligación que impone el ENS.
 
 **Conceptos que ordenan la materia** [NIST-SP800-34] [ISO22301]:
 
@@ -826,7 +826,7 @@ La **LOPDGDD**, en su **disposición adicional primera**, remite en el sector p�
 - **RPO** (*Recovery Point Objective*): **volumen máximo tolerable de datos perdidos**, expresado como el tiempo hacia atrás hasta el último punto recuperable. Un RPO de 24 horas se satisface con una copia diaria; un RPO cercano a cero exige **replicación síncrona**.
 - **Plan de continuidad** y **plan de recuperación ante desastres**: el primero cubre la continuidad de la actividad en su conjunto; el segundo, el restablecimiento técnico de los sistemas.
 
-> **[DATO CLAVE EXAMEN]** **RTO mira hacia delante** (cuánto tardo en volver) y **RPO mira hacia atrás** (cuánto pierdo). Los fija el **análisis de impacto**, y de ellos se derivan la tecnología y el coste, nunca al revés. Es una de las confusiones más frecuentes del bloque.
+> **[DATO CLAVE]** **RTO mira hacia delante** (cuánto tardo en volver) y **RPO mira hacia atrás** (cuánto pierdo). Los fija el **análisis de impacto**, y de ellos se derivan la tecnología y el coste, nunca al revés. Es una de las confusiones más frecuentes del bloque.
 
 **Qué cambia con la virtualización**, que es lo específico de este tema:
 
@@ -872,7 +872,7 @@ La virtualización es, además de una decisión técnica, **la palanca de eficie
 
 **Indicadores.** El indicador normalizado del centro de datos es el **PUE** (*Power Usage Effectiveness*), definido en la norma **ISO/IEC 30134-2** como el cociente entre la **energía total consumida por el centro de datos** y la **energía consumida por el equipamiento de tecnologías de la información** [ISO30134]. Su valor **ideal es 1,0** (toda la energía iría al equipamiento TI y nada a refrigeración, pérdidas o iluminación) y en la práctica siempre es mayor. Junto a él se manejan la **ratio de consolidación** (máquinas virtuales por anfitrión) y la **utilización media** de los recursos.
 
-> **[DATO CLAVE EXAMEN]** El **PUE** se calcula como energía **total** del centro de datos dividida entre energía del **equipamiento TI**; **cuanto más bajo, mejor**, y **1,0 es el óptimo teórico** [ISO30134]. Cuidado con la trampa habitual: **un PUE bajo no significa que el centro de datos sea eficiente en su conjunto** —mide la eficiencia de la instalación, no si los servidores están bien aprovechados—; un centro con PUE excelente lleno de servidores ociosos sigue derrochando energía. Por eso el PUE debe leerse junto con la **utilización real** del equipamiento.
+> **[DATO CLAVE]** El **PUE** se calcula como energía **total** del centro de datos dividida entre energía del **equipamiento TI**; **cuanto más bajo, mejor**, y **1,0 es el óptimo teórico** [ISO30134]. Cuidado con la trampa habitual: **un PUE bajo no significa que el centro de datos sea eficiente en su conjunto** —mide la eficiencia de la instalación, no si los servidores están bien aprovechados—; un centro con PUE excelente lleno de servidores ociosos sigue derrochando energía. Por eso el PUE debe leerse junto con la **utilización real** del equipamiento.
 
 **Marco normativo y de gestión aplicable al sector público**:
 
@@ -881,7 +881,7 @@ La virtualización es, además de una decisión técnica, **la palanca de eficie
 - **ENS**: la **disponibilidad** es una de las cinco dimensiones y las medidas de protección de las instalaciones incluyen el suministro eléctrico y el acondicionamiento; eficiencia y disponibilidad son objetivos que deben equilibrarse, no oponerse [ENS].
 - **Códigos de conducta y marcos de buenas prácticas** europeos para la eficiencia energética de centros de datos, empleados habitualmente como referencia técnica en los pliegos.
 
-> **[EJEMPLO AYTO MADRID]** Un proyecto municipal de consolidación sustituye un parque de servidores físicos infrautilizados por un clúster reducido de anfitriones con gestión dinámica de energía, y despliega escritorios por sesiones y VDI reutilizando durante tres años más los equipos existentes como terminales. El resultado combina las tres dimensiones que la Administración debe justificar: **económica** (menos equipos, menos consumo, menos mantenimiento), **de servicio** (alta disponibilidad y mantenimiento sin ventanas de parada) y **ambiental** (menor consumo eléctrico y menos residuos de aparatos eléctricos y electrónicos), esta última acreditable mediante indicadores como el PUE y la ratio de consolidación.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Un proyecto municipal de consolidación sustituye un parque de servidores físicos infrautilizados por un clúster reducido de anfitriones con gestión dinámica de energía, y despliega escritorios por sesiones y VDI reutilizando durante tres años más los equipos existentes como terminales. El resultado combina las tres dimensiones que la Administración debe justificar: **económica** (menos equipos, menos consumo, menos mantenimiento), **de servicio** (alta disponibilidad y mantenimiento sin ventanas de parada) y **ambiental** (menor consumo eléctrico y menos residuos de aparatos eléctricos y electrónicos), esta última acreditable mediante indicadores como el PUE y la ratio de consolidación.
 
 ---
 

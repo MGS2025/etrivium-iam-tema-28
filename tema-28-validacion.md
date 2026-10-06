@@ -96,6 +96,6 @@
 
 _(Espacio para anotaciones de María, Ana y la revisión IAM.)_
 
-- Pendiente confirmar si conviene **ampliar el bloque de contenedores** (§2.3) con más detalle de orquestación, o si el nivel actual es el correcto teniendo en cuenta que el temario oficial solo los menciona dentro de este tema y que su peso en examen es previsiblemente menor que el de la virtualización clásica.
+- Pendiente confirmar si conviene **ampliar el bloque de contenedores** (§2.3) con más detalle de orquestación, o si el nivel actual es el correcto teniendo en cuenta que el temario oficial solo los menciona dentro de este tema y que su peso en él es menor que el de la virtualización clásica.
 - Pendiente confirmar si el **desarrollo del bloque normativo** (§5, con ENS, RGPD, continuidad y eficiencia energética) tiene la extensión adecuada. El esqueleto del tema lo pide expresamente, pero buena parte de la materia se desarrolla en los Temas 32 y 39; aquí se ha tratado exclusivamente desde la perspectiva de **qué cambia al virtualizar**.
 - Este tema es, junto al **Tema 31** (cloud), uno de los **más sensibles a la obsolescencia** del bloque técnico en su capa de producto (nombres, propietarios y modelos de licencia de las plataformas). Su capa conceptual, en cambio, es muy estable. Conviene fijar una **revisión de vigencia antes de cada convocatoria**, limitada a los nombres de producto de Tier 2.
