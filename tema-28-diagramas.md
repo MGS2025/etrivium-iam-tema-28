@@ -70,7 +70,7 @@
 **Propósito**: Mostrar en paralelo cómo resuelve cada técnica el conflicto de privilegios del x86, que es el eje conceptual de la sección 1.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 366" role="img" aria-label="Comparación de las tres técnicas de virtualización: virtualización total con traducción binaria y el núcleo huésped desplazado del anillo cero, paravirtualización con núcleo modificado que hace llamadas al hipervisor, y virtualización asistida por hardware donde la CPU añade un modo raíz para el hipervisor y el huésped conserva su anillo cero">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 372" role="img" aria-label="Comparación de las tres técnicas de virtualización: virtualización total con traducción binaria y el núcleo huésped desplazado del anillo cero, paravirtualización con núcleo modificado que hace llamadas al hipervisor, y virtualización asistida por hardware donde la CPU añade un modo raíz para el hipervisor y el huésped conserva su anillo cero">
   <style>.t2b{font:700 11px system-ui,sans-serif;fill:#fff}.s2b{font:9px system-ui,sans-serif;fill:#fff}.h2b{font:700 13px system-ui,sans-serif;fill:#0055a0}.k2b{font:700 10.5px system-ui,sans-serif;fill:#0055a0}.n2b{font:9px system-ui,sans-serif;fill:#333}</style>
   <text x="340" y="20" text-anchor="middle" class="h2b">Cómo resuelve cada técnica el conflicto de privilegios</text>
   <text x="123" y="42" text-anchor="middle" class="k2b">1. VIRTUALIZACIÓN TOTAL</text>
@@ -87,15 +87,15 @@
   <path d="M557 144 L557 158" stroke="#d13c3c" stroke-width="2" marker-end="url(#a2b)"/>
   <defs><marker id="a2b" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#d13c3c"/></marker></defs>
   <text x="123" y="155" text-anchor="middle" class="n2b"> </text>
-  <rect x="16" y="162" width="214" height="44" rx="4" fill="#d13c3c"/><text x="123" y="180" text-anchor="middle" class="t2b">Traducción binaria</text><text x="123" y="194" text-anchor="middle" class="s2b">reescribe el código privilegiado</text><text x="123" y="204" text-anchor="middle" class="s2b">y lo guarda en caché</text>
-  <rect x="233" y="162" width="214" height="44" rx="4" fill="#d13c3c"/><text x="340" y="180" text-anchor="middle" class="t2b">Llamadas al hipervisor</text><text x="340" y="194" text-anchor="middle" class="s2b">interfaz explícita, sin capturas</text><text x="340" y="204" text-anchor="middle" class="s2b">ni emulación costosa</text>
-  <rect x="450" y="162" width="214" height="44" rx="4" fill="#d13c3c"/><text x="557" y="180" text-anchor="middle" class="t2b">VM exit / VM entry</text><text x="557" y="194" text-anchor="middle" class="s2b">solo en los eventos definidos</text><text x="557" y="204" text-anchor="middle" class="s2b">en la VMCS / VMCB</text>
-  <rect x="16" y="212" width="648" height="34" rx="4" fill="#0055a0"/><text x="340" y="228" text-anchor="middle" class="t2b">HIPERVISOR (anillo 0; con asistencia por hardware, modo raíz VMX / SVM — el llamado «anillo −1»)</text><text x="340" y="241" text-anchor="middle" class="s2b">controla todos los recursos físicos y aísla las máquinas virtuales entre sí</text>
-  <rect x="16" y="252" width="648" height="30" rx="4" fill="#333"/><text x="340" y="272" text-anchor="middle" class="t2b">HARDWARE — CPU con VT-x / AMD-V / EL2 · EPT o NPT para memoria · IOMMU (VT-d / AMD-Vi) para E/S</text>
-  <rect x="16" y="290" width="648" height="46" rx="4" fill="none" stroke="#0055a0" stroke-width="2"/>
-  <text x="340" y="308" text-anchor="middle" class="k2b">Huésped sin modificar: técnicas 1 y 3 · Huésped modificado: técnica 2</text>
-  <text x="340" y="326" text-anchor="middle" class="n2b">La paravirtualización del NÚCLEO está desplazada; la paravirtualización de DISPOSITIVOS (virtio) sigue siendo la norma</text>
-  <text x="670" y="356" text-anchor="end" style="font:10px system-ui;fill:#666">[Fuente: POPEK74; ROBIN00; INTEL-SDM; AMD-APM; XEN-DOC]</text>
+  <rect x="16" y="162" width="214" height="50" rx="4" fill="#d13c3c"/><text x="123" y="180" text-anchor="middle" class="t2b">Traducción binaria</text><text x="123" y="193" text-anchor="middle" class="s2b">reescribe el código privilegiado</text><text x="123" y="205" text-anchor="middle" class="s2b">y lo guarda en caché</text>
+  <rect x="233" y="162" width="214" height="50" rx="4" fill="#d13c3c"/><text x="340" y="180" text-anchor="middle" class="t2b">Llamadas al hipervisor</text><text x="340" y="193" text-anchor="middle" class="s2b">interfaz explícita, sin capturas</text><text x="340" y="205" text-anchor="middle" class="s2b">ni emulación costosa</text>
+  <rect x="450" y="162" width="214" height="50" rx="4" fill="#d13c3c"/><text x="557" y="180" text-anchor="middle" class="t2b">VM exit / VM entry</text><text x="557" y="193" text-anchor="middle" class="s2b">solo en los eventos definidos</text><text x="557" y="205" text-anchor="middle" class="s2b">en la VMCS / VMCB</text>
+  <rect x="16" y="218" width="648" height="34" rx="4" fill="#0055a0"/><text x="340" y="234" text-anchor="middle" class="t2b">HIPERVISOR (anillo 0; con asistencia por hardware, modo raíz VMX / SVM — el llamado «anillo −1»)</text><text x="340" y="247" text-anchor="middle" class="s2b">controla todos los recursos físicos y aísla las máquinas virtuales entre sí</text>
+  <rect x="16" y="258" width="648" height="30" rx="4" fill="#333"/><text x="340" y="278" text-anchor="middle" class="t2b">HARDWARE — CPU con VT-x / AMD-V / EL2 · EPT o NPT para memoria · IOMMU (VT-d / AMD-Vi) para E/S</text>
+  <rect x="16" y="296" width="648" height="46" rx="4" fill="none" stroke="#0055a0" stroke-width="2"/>
+  <text x="340" y="314" text-anchor="middle" class="k2b">Huésped sin modificar: técnicas 1 y 3 · Huésped modificado: técnica 2</text>
+  <text x="340" y="332" text-anchor="middle" class="n2b">La paravirtualización del NÚCLEO está desplazada; la paravirtualización de DISPOSITIVOS (virtio) sigue siendo la norma</text>
+  <text x="670" y="362" text-anchor="end" style="font:10px system-ui;fill:#666">[Fuente: POPEK74; ROBIN00; INTEL-SDM; AMD-APM; XEN-DOC]</text>
 </svg>
 ```
 
@@ -146,7 +146,7 @@
 **Propósito**: Mostrar las piezas de un clúster real y la separación de flujos de red, que es la base de las medidas de seguridad de §5.1.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 388" role="img" aria-label="Arquitectura de un entorno de virtualización de servidores: servidor de gestión centralizado, clúster de tres anfitriones con hipervisor y máquinas virtuales, almacenamiento compartido accesible por todos y cuatro redes separadas para gestión, máquinas virtuales, almacenamiento y migración">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 394" role="img" aria-label="Arquitectura de un entorno de virtualización de servidores: servidor de gestión centralizado, clúster de tres anfitriones con hipervisor y máquinas virtuales, almacenamiento compartido accesible por todos y cuatro redes separadas para gestión, máquinas virtuales, almacenamiento y migración">
   <style>.t4{font:700 10.5px system-ui,sans-serif;fill:#fff}.s4{font:9px system-ui,sans-serif;fill:#fff}.h4{font:700 13px system-ui,sans-serif;fill:#0055a0}.k4{font:700 10.5px system-ui,sans-serif;fill:#0055a0}.n4{font:9px system-ui,sans-serif;fill:#333}</style>
   <text x="340" y="20" text-anchor="middle" class="h4">Entorno de virtualización de servidores: piezas y flujos</text>
   <rect x="20" y="34" width="180" height="52" rx="5" fill="#0055a0"/><text x="110" y="52" text-anchor="middle" class="t4">SERVIDOR DE GESTIÓN</text><text x="110" y="66" text-anchor="middle" class="s4">inventario · políticas de clúster</text><text x="110" y="79" text-anchor="middle" class="s4">roles (RBAC) · registro de actividad</text>
@@ -181,12 +181,12 @@
   <text x="502" y="265" text-anchor="middle" style="font:700 9.5px system-ui;fill:#a06000">RED DE MIGRACIÓN EN CALIENTE (dedicada)</text>
   <rect x="20" y="278" width="640" height="18" rx="3" fill="#d13c3c" opacity="0.18" stroke="#d13c3c"/>
   <text x="340" y="291" text-anchor="middle" style="font:700 9.5px system-ui;fill:#a02020">RED DE ALMACENAMIENTO (FC / iSCSI / NFS)</text>
-  <rect x="140" y="304" width="400" height="46" rx="5" fill="#0055a0"/>
+  <rect x="140" y="304" width="400" height="52" rx="5" fill="#0055a0"/>
   <text x="340" y="322" text-anchor="middle" class="t4">ALMACENAMIENTO COMPARTIDO</text>
   <text x="340" y="336" text-anchor="middle" class="s4">accesible desde TODOS los anfitriones — requisito de HA y de migración en caliente</text>
   <text x="340" y="348" text-anchor="middle" class="s4">cabina SAN / NAS o almacenamiento distribuido hiperconvergente (§4.1)</text>
-  <text x="340" y="368" text-anchor="middle" class="n4">La separación de los cuatro flujos de red es una buena práctica de seguridad recogida por el NIST y exigible vía ENS</text>
-  <text x="670" y="378" text-anchor="end" style="font:10px system-ui;fill:#666">[Fuente: VMWARE-DOC; HYPERV-DOC; NIST-SP800-125]</text>
+  <text x="340" y="374" text-anchor="middle" class="n4">La separación de los cuatro flujos de red es una buena práctica de seguridad recogida por el NIST y exigible vía ENS</text>
+  <text x="670" y="388" text-anchor="end" style="font:10px system-ui;fill:#666">[Fuente: VMWARE-DOC; HYPERV-DOC; NIST-SP800-125]</text>
 </svg>
 ```
 
@@ -205,13 +205,13 @@
   <rect x="26" y="50" width="150" height="46" rx="5" fill="#888"/><text x="101" y="70" text-anchor="middle" class="t5">Dirección VIRTUAL</text><text x="101" y="85" text-anchor="middle" class="s5">del proceso del huésped</text>
   <path d="M180 73 L216 73" stroke="#0055a0" stroke-width="2.5" marker-end="url(#a5)"/>
   <defs><marker id="a5" markerWidth="8" markerHeight="8" refX="7" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#0055a0"/></marker></defs>
-  <text x="198" y="66" text-anchor="middle" style="font:8px system-ui;fill:#0055a0">tablas</text>
-  <text x="198" y="89" text-anchor="middle" style="font:8px system-ui;fill:#0055a0">huésped</text>
+  <text x="198" y="59" text-anchor="middle" style="font:8px system-ui;fill:#0055a0">tablas</text>
+  <text x="198" y="94" text-anchor="middle" style="font:8px system-ui;fill:#0055a0">huésped</text>
   <rect x="220" y="50" width="170" height="46" rx="5" fill="#e89822"/><text x="305" y="70" text-anchor="middle" class="t5">Dirección FÍSICA del huésped</text><text x="305" y="85" text-anchor="middle" class="s5">el huésped cree que es real</text>
   <path d="M394 73 L430 73" stroke="#d13c3c" stroke-width="2.5" marker-end="url(#a5b)"/>
   <defs><marker id="a5b" markerWidth="8" markerHeight="8" refX="7" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#d13c3c"/></marker></defs>
-  <text x="412" y="66" text-anchor="middle" style="font:8px system-ui;fill:#d13c3c">EPT</text>
-  <text x="412" y="89" text-anchor="middle" style="font:8px system-ui;fill:#d13c3c">NPT</text>
+  <text x="412" y="59" text-anchor="middle" style="font:8px system-ui;fill:#d13c3c">EPT</text>
+  <text x="412" y="94" text-anchor="middle" style="font:8px system-ui;fill:#d13c3c">NPT</text>
   <rect x="434" y="50" width="226" height="46" rx="5" fill="#0055a0"/><text x="547" y="70" text-anchor="middle" class="t5">Dirección FÍSICA REAL del anfitrión</text><text x="547" y="85" text-anchor="middle" class="s5">resuelta por la MMU, sin el hipervisor</text>
   <rect x="26" y="104" width="634" height="38" rx="4" fill="#f2f6fa" stroke="#0055a0"/>
   <text x="340" y="120" text-anchor="middle" class="n5">Sin asistencia por hardware había que mantener por software TABLAS DE PÁGINAS SOMBRA: correcto, pero muy costoso.</text>
@@ -236,7 +236,7 @@
   <text x="583" y="187" text-anchor="middle" class="t5">4. INTERCAMBIO A DISCO</text>
   <text x="583" y="203" text-anchor="middle" class="s5">el hipervisor elige a ciegas</text>
   <text x="583" y="217" text-anchor="middle" class="s5">qué página saca</text>
-  <text x="583" y="235" text-anchor="middle" class="s5">SÍNTOMA DE MAL DIMENSIONADO</text>
+  <text x="583" y="235" text-anchor="middle" class="s5" style="font-size:8px">SÍNTOMA DE MAL DIMENSIONADO</text>
   <path d="M26 254 L660 254" stroke="#999" stroke-width="1.5" marker-end="url(#a5c)"/>
   <defs><marker id="a5c" markerWidth="8" markerHeight="8" refX="7" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#999"/></marker></defs>
   <text x="340" y="270" text-anchor="middle" class="n5">presión de memoria creciente en el anfitrión →</text>
@@ -279,7 +279,7 @@
   <rect x="20" y="234" width="152" height="60" rx="4" fill="#f2f6fa" stroke="#888"/>
   <text x="96" y="251" text-anchor="middle" class="n6">Sin requisitos</text>
   <text x="96" y="266" text-anchor="middle" class="n6">Migración: SÍ</text>
-  <text x="96" y="284" text-anchor="middle" class="n6">Instalación y huéspedes antiguos</text>
+  <text x="96" y="284" text-anchor="middle" class="n6" style="font-size:8.5px">Instalación y huéspedes antiguos</text>
   <rect x="182" y="234" width="152" height="60" rx="4" fill="#eaf5ec" stroke="#2d8659" stroke-width="2"/>
   <text x="258" y="251" text-anchor="middle" class="n6">Controlador en el huésped</text>
   <text x="258" y="266" text-anchor="middle" class="n6">Migración: SÍ</text>
@@ -287,11 +287,11 @@
   <rect x="344" y="234" width="152" height="60" rx="4" fill="#fdf3e3" stroke="#e89822"/>
   <text x="420" y="251" text-anchor="middle" class="n6">IOMMU obligatoria</text>
   <text x="420" y="266" text-anchor="middle" style="font:700 9px system-ui;fill:#a02020">Migración: NO</text>
-  <text x="420" y="284" text-anchor="middle" class="n6">GPU, cifrado, tarjetas especiales</text>
+  <text x="420" y="284" text-anchor="middle" class="n6" style="font-size:8.5px">GPU, cifrado, tarjetas especiales</text>
   <rect x="506" y="234" width="154" height="60" rx="4" fill="#e8f0f8" stroke="#0055a0"/>
   <text x="583" y="251" text-anchor="middle" class="n6">IOMMU + tarjeta compatible</text>
   <text x="583" y="266" text-anchor="middle" style="font:700 9px system-ui;fill:#a02020">Migración: NO</text>
-  <text x="583" y="284" text-anchor="middle" class="n6">Red de altísimo rendimiento, NFV</text>
+  <text x="583" y="284" text-anchor="middle" class="n6" style="font-size:8.5px">Red de altísimo rendimiento, NFV</text>
   <rect x="120" y="302" width="440" height="24" rx="4" fill="none" stroke="#0055a0" stroke-width="2"/>
   <text x="340" y="318" text-anchor="middle" class="k6">virtio ES paravirtualización, aunque el huésped no esté paravirtualizado</text>
   <text x="670" y="336" text-anchor="end" style="font:10px system-ui;fill:#666">[Fuente: VIRTIO; PCI-SRIOV; INTEL-VTD]</text>
@@ -423,7 +423,7 @@
   <style>.t10{font:700 10.5px system-ui,sans-serif;fill:#fff}.s10{font:9px system-ui,sans-serif;fill:#fff}.h10{font:700 13px system-ui,sans-serif;fill:#0055a0}.k10{font:700 10.5px system-ui,sans-serif;fill:#0055a0}.n10{font:9px system-ui,sans-serif;fill:#333}</style>
   <text x="340" y="20" text-anchor="middle" class="h10">Qué se virtualiza en cada modelo de puesto de trabajo</text>
   <rect x="20" y="34" width="206" height="26" rx="4" fill="#0055a0"/><text x="123" y="52" text-anchor="middle" class="t10">VDI — se virtualiza LA MÁQUINA</text>
-  <rect x="237" y="34" width="206" height="26" rx="4" fill="#2d8659"/><text x="340" y="52" text-anchor="middle" class="t10">SESIONES — el SISTEMA OPERATIVO</text>
+  <rect x="237" y="34" width="206" height="26" rx="4" fill="#2d8659"/><text x="340" y="52" text-anchor="middle" class="t10" style="font-size:10px">SESIONES — el SISTEMA OPERATIVO</text>
   <rect x="454" y="34" width="206" height="26" rx="4" fill="#e89822"/><text x="557" y="52" text-anchor="middle" class="t10">APLICACIONES — LA APLICACIÓN</text>
   <rect x="26" y="68" width="60" height="52" rx="3" fill="#888"/><text x="56" y="87" text-anchor="middle" class="s10">Usuario 1</text><text x="56" y="102" text-anchor="middle" class="s10">SO cliente</text><text x="56" y="114" text-anchor="middle" class="s10">VM propia</text>
   <rect x="93" y="68" width="60" height="52" rx="3" fill="#888"/><text x="123" y="87" text-anchor="middle" class="s10">Usuario 2</text><text x="123" y="102" text-anchor="middle" class="s10">SO cliente</text><text x="123" y="114" text-anchor="middle" class="s10">VM propia</text>
@@ -455,8 +455,8 @@
   <text x="557" y="222" text-anchor="middle" class="n10">Entrega bajo demanda</text>
   <text x="557" y="238" text-anchor="middle" class="n10">Coste inicial: empaquetado</text>
   <rect x="20" y="254" width="640" height="34" rx="4" fill="#0055a0"/>
-  <text x="340" y="271" text-anchor="middle" class="t10">NO SON EXCLUYENTES: lo habitual es usar virtualización de APLICACIONES dentro de un escritorio VDI o de sesiones</text>
-  <text x="340" y="284" text-anchor="middle" class="s10">y asignar cada colectivo al modelo que le corresponde según su perfil de uso</text>
+  <text x="340" y="268" text-anchor="middle" class="t10" style="font-size:10px">NO SON EXCLUYENTES: lo habitual es usar virtualización de APLICACIONES dentro de un escritorio VDI o de sesiones</text>
+  <text x="340" y="282" text-anchor="middle" class="s10">y asignar cada colectivo al modelo que le corresponde según su perfil de uso</text>
   <rect x="20" y="296" width="640" height="24" rx="4" fill="none" stroke="#d13c3c" stroke-width="2"/>
   <text x="340" y="312" text-anchor="middle" style="font:700 10px system-ui;fill:#a02020">CLIENTE LIGERO = el dispositivo terminal · VDI = la arquitectura del lado del servidor. No es lo mismo</text>
   <text x="670" y="336" text-anchor="end" style="font:10px system-ui;fill:#666">[Fuente: HORIZON-DOC; CITRIX-DOC; AVD-DOC; APPV]</text>
@@ -493,8 +493,8 @@
   <text x="499" y="84" text-anchor="middle" class="s11">del empleado</text>
   <rect x="562" y="36" width="102" height="60" rx="5" fill="#e89822"/>
   <text x="613" y="56" text-anchor="middle" class="t11">PORTAL</text>
-  <text x="613" y="71" text-anchor="middle" class="s11">catálogo de recursos</text>
-  <text x="613" y="84" text-anchor="middle" class="s11">a los que tiene derecho</text>
+  <text x="613" y="71" text-anchor="middle" class="s11" style="font-size:7.8px">catálogo de recursos</text>
+  <text x="613" y="84" text-anchor="middle" class="s11" style="font-size:7.8px">a los que tiene derecho</text>
   <path d="M136 60 L154 60" stroke="#d13c3c" stroke-width="2" marker-end="url(#a11)"/>
   <defs><marker id="a11" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#d13c3c"/></marker></defs>
   <text x="145" y="53" text-anchor="middle" class="num11">1</text>
@@ -512,7 +512,7 @@
   <text x="126" y="223" text-anchor="middle" class="s11">al siguiente reinicio</text>
   <path d="M212 178 L228 178" stroke="#2d8659" stroke-width="2.5" marker-end="url(#a11b)"/>
   <defs><marker id="a11b" markerWidth="8" markerHeight="8" refX="7" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#2d8659"/></marker></defs>
-  <text x="220" y="170" text-anchor="middle" style="font:700 7.5px system-ui;fill:#2d8659">clona</text>
+  <text x="220" y="163" text-anchor="middle" style="font:700 7.5px system-ui;fill:#2d8659">clona</text>
   <rect x="232" y="128" width="432" height="100" rx="5" fill="#f2f6fa" stroke="#0055a0" stroke-width="2"/>
   <text x="448" y="145" text-anchor="middle" class="k11">CONJUNTO DE ESCRITORIOS VIRTUALES (clúster de hipervisores)</text>
   <rect x="244" y="154" width="94" height="30" rx="3" fill="#0055a0"/><text x="291" y="173" text-anchor="middle" class="s11">Escritorio 1</text>
@@ -632,7 +632,7 @@
   <rect x="560" y="50" width="96" height="74" rx="4" fill="#0055a0"/><text x="608" y="68" text-anchor="middle" class="s13">Nodo 3</text><text x="608" y="83" text-anchor="middle" class="s13">cómputo</text>
   <rect x="568" y="92" width="80" height="24" rx="3" fill="#2d8659"/><text x="608" y="108" text-anchor="middle" class="s13">discos locales</text>
   <rect x="354" y="132" width="302" height="26" rx="3" fill="#2d8659"/>
-  <text x="505" y="150" text-anchor="middle" class="t13">SOFTWARE DISTRIBUIDO: agrega y REPLICA entre nodos</text>
+  <text x="505" y="150" text-anchor="middle" class="t13" style="font-size:9.2px">SOFTWARE DISTRIBUIDO: agrega y REPLICA entre nodos</text>
   <rect x="354" y="164" width="302" height="24" rx="3" fill="#e89822"/>
   <text x="505" y="181" text-anchor="middle" class="t13">ALMACÉN ÚNICO presentado al clúster</text>
   <rect x="24" y="198" width="302" height="66" rx="4" fill="#f2f6fa" stroke="#0055a0"/>
@@ -670,12 +670,12 @@
   <text x="120" y="92" text-anchor="middle" class="s14">(seguridad, red, negocio)</text>
   <path d="M224 81 L252 81" stroke="#e89822" stroke-width="2.5" marker-end="url(#a14)"/>
   <defs><marker id="a14" markerWidth="8" markerHeight="8" refX="7" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#e89822"/></marker></defs>
-  <text x="238" y="74" text-anchor="middle" style="font:700 8px system-ui;fill:#a06000">NORTE</text>
+  <text x="238" y="68" text-anchor="middle" style="font:700 8px system-ui;fill:#a06000">NORTE</text>
   <rect x="256" y="58" width="200" height="46" rx="4" fill="#d13c3c"/>
   <text x="356" y="76" text-anchor="middle" class="s14">CONTROLADOR SDN</text>
   <text x="356" y="92" text-anchor="middle" class="s14">visión global de la topología</text>
   <path d="M460 81 L488 81" stroke="#e89822" stroke-width="2.5" marker-end="url(#a14)"/>
-  <text x="474" y="74" text-anchor="middle" style="font:700 8px system-ui;fill:#a06000">SUR</text>
+  <text x="474" y="68" text-anchor="middle" style="font:700 8px system-ui;fill:#a06000">SUR</text>
   <rect x="492" y="58" width="168" height="46" rx="4" fill="#888"/>
   <text x="576" y="76" text-anchor="middle" class="s14">Conmutadores físicos y</text>
   <text x="576" y="92" text-anchor="middle" class="s14">virtuales: solo reenvían</text>
@@ -709,7 +709,7 @@
   <text x="340" y="313" text-anchor="middle" class="t14">RED FÍSICA — solo tiene que encaminar paquetes IP entre anfitriones</text>
   <rect x="20" y="330" width="640" height="20" rx="3" fill="none" stroke="#0055a0" stroke-width="2"/>
   <text x="340" y="344" text-anchor="middle" class="k14">Sin virtualizar la red, crear una máquina virtual en minutos no sirve de nada: conectarla seguiría tardando días</text>
-  <text x="670" y="358" text-anchor="end" style="font:10px system-ui;fill:#666">[Fuente: RFC7348; RFC8926; ONF-SDN; NIST-SP800-125]</text>
+  <text x="670" y="364" text-anchor="end" style="font:10px system-ui;fill:#666">[Fuente: RFC7348; RFC8926; ONF-SDN; NIST-SP800-125]</text>
 </svg>
 ```
 
